@@ -10,9 +10,9 @@ int main() {
     SetTitle("V-SGMS 1.0");
     system("color f9");
     //welcomeInit();
-    USER *temp_user = (USER *) malloc(sizeof(USER));
-    loginMod(temp_user, 6, 3);
-    /*int choice;
+    //USER *temp_user = (USER *) malloc(sizeof(USER));
+    //loginMod(temp_user, 6, 3);
+    int choice;
     do {
         mainMenu();
         choice = menuController(3, 3, 3, 8, coverMainMenu);
@@ -22,7 +22,7 @@ int main() {
                 Sleep(500);
                 break;
             case 1:
-                printf("1");
+                studentGradeQueryMenu1();
                 break;
             case 2:
                 printf("2");
@@ -52,7 +52,6 @@ int main() {
                 break;
         }
     } while (choice < 1 || choice > 6);
-     */
     system("pause");
     return 0;
 }

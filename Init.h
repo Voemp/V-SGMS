@@ -30,6 +30,9 @@ void mainMenu();
 //函数功能：覆盖主菜单界面
 void coverMainMenu(int x);
 
+//函数功能：打印学生成绩查询界面（教师版）
+void studentGradeQueryMenu1();
+
 //函数功能：退出程序确认界面
 void exitConfirmMenu();
 
