@@ -113,15 +113,14 @@ int loginMod(USER *temp_user, int x, int y) {
     setCursor(0, y + 3);    //将光标移动到“密码：”下面一行
 
     FILE *fp;
-    fp = fopen("user.bin", "wb");    //打开文件
-    if (fp == NULL) {    //判断文件是否打开成功
+    if ((fp = fopen("user.txt", "w")) == NULL) {    //判断文件是否打开成功
         printf("文件打开失败！\n");
         Sleep(1000);
         exit(0);
     }
     fwrite(&temp_user, sizeof(USER), 1, fp);    //将用户信息写入文件
     fclose(fp);    //关闭文件
-    fp = fopen("user.bin", "rb");
+    fp = fopen("user.txt", "r");
     fread(&local_user, sizeof(USER), 1, fp);    //读取文件中的用户信息
     printf("account = %s\n", local_user.account);
     printf("password = %s\n", local_user.password);

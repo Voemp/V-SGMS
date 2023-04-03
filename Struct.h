@@ -12,6 +12,6 @@ typedef struct student {
     long studentID; //Ñ§ºÅ
     char studentName[20];   //ÐÕÃû
     int score[5];   //³É¼¨
-};
+} STU;
 
 #endif //V_SGMS_STRUCT_H
