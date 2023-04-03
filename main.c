@@ -5,6 +5,8 @@
 #include "LoginSystem.h"
 #include "struct.h"
 
+int g_subjectNum = 0;   //全局变量，用于存储科目数量
+USER *g_user = NULL;    //全局变量，用于存储当前登录用户的信息
 
 int main() {
     SetTitle("V-SGMS 1.0");
@@ -22,7 +24,39 @@ int main() {
                 Sleep(500);
                 break;
             case 1:
-                studentGradeQueryMenu1();
+                do {
+                    studentGradeQueryMenu1();
+                    choice = menuController(3, 3, 3, 10, coverStudentGradeQueryMenu1);
+                    switch (choice) {
+                        case 1:
+                            printf("1");
+                            break;
+                        case 2:
+                            printf("2");
+                            break;
+                        case 3:
+                            printf("3");
+                            break;
+                        case 4:
+                            printf("4");
+                            break;
+                        case 5:
+                            printf("5");
+                            break;
+                        case 6:
+                            printf("6");
+                            break;
+                        case 7:
+                            printf("7");
+                            break;
+                        case 8:
+                            break;
+                        default:
+                            printf("没有这个选项！");
+                            Sleep(300);
+                            break;
+                    }
+                } while (choice < 1 || choice > 8);
                 break;
             case 2:
                 printf("2");

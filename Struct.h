@@ -12,6 +12,8 @@ typedef struct student {
     long studentID; //学号
     char studentName[20];   //姓名
     int score[5];   //成绩
+    int totalScore; //总分
+    float averageScore; //平均分
 } STU;
 
 #endif //V_SGMS_STRUCT_H
