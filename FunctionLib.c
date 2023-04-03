@@ -1,9 +1,5 @@
 // Created by VoidEmpty on 2023/3/29.
 #include "FunctionLib.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <conio.h>
-#include <windows.h>
 
 //函数功能：获取光标位置
 COORD getCursor() {
