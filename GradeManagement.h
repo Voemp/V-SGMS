@@ -2,4 +2,7 @@
 #ifndef V_SGMS_GRADEMANAGEMENT_H
 #define V_SGMS_GRADEMANAGEMENT_H
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #endif //V_SGMS_GRADEMANAGEMENT_H

@@ -30,6 +30,15 @@ void mainMenu();
 //函数功能：覆盖主菜单界面
 void coverMainMenu(int x);
 
+//函数功能：退出程序确认界面
+void exitConfirmMenu();
+
+//函数功能：覆盖退出程序确认界面
+void coverExitConfirmMenu(int x);
+
+//函数功能：关于界面
+void About();
+
 /*函数功能：用方向键选择菜单或者输入数字选择菜单
  * line：当前光标所在行数
  * deta：第一个选项所在行（行数从0开始计算）
@@ -38,9 +47,5 @@ void coverMainMenu(int x);
  * 返回值：选择的选项（1~9）（引用时判断是否为已有选项，如果不是则重新选择）
  */
 int menuController(int line, int deta, int lower, int upper, void (*p)(int));
-
-
-//函数功能：关于界面
-void About();
 
 #endif //V_SGMS_INIT_H
