@@ -10,7 +10,9 @@ int main() {
     SetTitle("V-SGMS 1.0");
     system("color f9");
     //welcomeInit();
-    int choice;
+    USER *temp_user = (USER *) malloc(sizeof(USER));
+    loginMod(temp_user, 6, 3);
+    /*int choice;
     do {
         mainMenu();
         choice = menuController(3, 3, 3, 8, coverMainMenu);
@@ -44,8 +46,7 @@ int main() {
                 break;
         }
     } while (choice < 1 || choice > 6);
-    //USER *temp_user = (USER *) malloc(sizeof(USER));
-    //loginMod(temp_user, 6, 3);
+*/
     system("pause");
     return 0;
 }
