@@ -6,6 +6,7 @@
 #include "struct.h"
 
 int g_subjectNum = 0;   //全局变量，用于存储科目数量
+int g_studentNum = 0;   //全局变量，用于存储学生数量
 USER *g_user = NULL;    //全局变量，用于存储当前登录用户的信息
 
 int main() {
