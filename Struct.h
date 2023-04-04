@@ -9,16 +9,18 @@ typedef struct user {
 } USER;
 
 typedef struct subject {
-    char subjectName[20];   //科目名
+    int subjectName;   //科目名
     int subjectScore;   //科目分数
 } SUB;
 
 typedef struct student {
-    long studentID; //学号
+    struct student *pre;   //前一个节点
+    char studentID[20]; //学号
     char studentName[20];   //姓名
     SUB score[6];   //成绩
     int totalScore; //总分
     float averageScore; //平均分
+    struct student *next;   //后一个节点
 } STU;
 
 #endif //V_SGMS_STRUCT_H

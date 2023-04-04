@@ -4,7 +4,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #include "Struct.h"
-
+#include "StudentDoubleList.h"
 
 #endif //V_SGMS_GRADEMANAGEMENT_H

@@ -4,6 +4,8 @@
 #include "Init.h"
 #include "LoginSystem.h"
 #include "struct.h"
+#include "GradeManagement.h"
+#include "StudentDoubleList.h"
 
 int g_subjectNum = 0;   //全局变量，用于存储科目数量
 int g_studentNum = 0;   //全局变量，用于存储学生数量
@@ -13,13 +15,15 @@ int main() {
     SetTitle("V-SGMS 1.0");
     system("color f9");
     //welcomeInit();
+    STU *head = doubleListCreate();
+
     //USER *temp_user = (USER *) malloc(sizeof(USER));
     //loginMod(temp_user, 6, 3);
-    int choice;
+    int choice1, choice2;
     do {
         mainMenu();
-        choice = menuController(3, 3, 3, 8, coverMainMenu);
-        switch (choice) {
+        choice1 = menuController(3, 3, 3, 8, coverMainMenu);
+        switch (choice1) {
             case 0:
                 printf("这是个小彩蛋，嘻嘻！");
                 Sleep(500);
@@ -27,8 +31,8 @@ int main() {
             case 1:
                 do {
                     studentGradeQueryMenu1();
-                    choice = menuController(3, 3, 3, 10, coverStudentGradeQueryMenu1);
-                    switch (choice) {
+                    choice2 = menuController(3, 3, 3, 10, coverStudentGradeQueryMenu1);
+                    switch (choice2) {
                         case 1:
                             printf("1");
                             break;
@@ -51,16 +55,38 @@ int main() {
                             printf("7");
                             break;
                         case 8:
+                            choice1 = 0;
                             break;
                         default:
                             printf("没有这个选项！");
                             Sleep(300);
                             break;
                     }
-                } while (choice < 1 || choice > 8);
+                } while (choice2 < 1 || choice2 > 8);
                 break;
             case 2:
-                printf("2");
+                do {
+                    studentGradeManageMenu1();
+                    choice2 = menuController(3, 3, 3, 6, coverStudentGradeManageMenu1);
+                    switch (choice2) {
+                        case 1:
+
+                            break;
+                        case 2:
+                            printf("2");
+                            break;
+                        case 3:
+                            printf("3");
+                            break;
+                        case 4:
+                            choice1 = 0;
+                            break;
+                        default:
+                            printf("没有这个选项！");
+                            Sleep(300);
+                            break;
+                    }
+                } while (choice2 < 1 || choice2 > 4);
                 break;
             case 3:
                 printf("3");
@@ -70,23 +96,23 @@ int main() {
                 break;
             case 5:
                 exitConfirmMenu();
-                choice = menuController(3, 3, 3, 4, coverExitConfirmMenu);
-                if (choice == 1) {
+                choice1 = menuController(3, 3, 3, 4, coverExitConfirmMenu);
+                if (choice1 == 1) {
                     exit(0);
                 } else {
-                    choice = 0;
+                    choice1 = 0;
                 }
                 break;
             case 6:
                 About();
-                choice = 0;
+                choice1 = 0;
                 break;
             default:
                 printf("没有这个选项！");
                 Sleep(300);
                 break;
         }
-    } while (choice < 1 || choice > 6);
+    } while (choice1 < 1 || choice1 > 6);
     system("pause");
     return 0;
 }

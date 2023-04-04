@@ -147,6 +147,44 @@ void coverStudentGradeQueryMenu1(int x) {
     }
 }
 
+//函数功能：打印学生成绩管理界面（教师版）
+void studentGradeManageMenu1() {
+    system("cls");
+    printf("*********************************\n");
+    printf("*     学生成绩管理（教师版）    *\n");
+    printf("*********************************\n");
+    printf("*       1.添加学生成绩          *\n");
+    printf("*       2.修改学生成绩          *\n");
+    printf("*       3.删除学生成绩          *\n");
+    printf("*       4.返回主菜单            *\n");
+    printf("*********************************\n");
+    IN_REDWORD;
+    printf("请使用↑、↓和enter来实现选择和执行命令\n");
+    printf("或者输入每个命令前面的数字来执行命令\n");
+    IN_WHITE;
+    printf("*****************************\n");
+}
+
+//函数功能：覆盖学生成绩管理界面（教师版）
+void coverStudentGradeManageMenu1(int x) {
+    switch (x) {
+        case 1:
+            printf("*       1.添加学生成绩          *\n");
+            break;
+        case 2:
+            printf("*       2.修改学生成绩          *\n");
+            break;
+        case 3:
+            printf("*       3.删除学生成绩          *\n");
+            break;
+        case 4:
+            printf("*       4.返回主菜单            *\n");
+            break;
+        default:
+            break;
+    }
+}
+
 //函数功能：退出程序确认界面
 void exitConfirmMenu() {
     system("cls");

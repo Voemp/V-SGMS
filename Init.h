@@ -36,6 +36,12 @@ void studentGradeQueryMenu1();
 //函数功能：覆盖学生成绩查询界面（教师版）
 void coverStudentGradeQueryMenu1(int x);
 
+//函数功能：打印学生成绩管理界面（教师版）
+void studentGradeManageMenu1();
+
+//函数功能：覆盖学生成绩管理界面（教师版）
+void coverStudentGradeManageMenu1(int x);
+
 //函数功能：退出程序确认界面
 void exitConfirmMenu();
 
