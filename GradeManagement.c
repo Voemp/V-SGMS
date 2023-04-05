@@ -20,20 +20,13 @@ void readScore(STU *stu) {
 
 //函数功能：无限次录入成绩
 void readScoreInfinite(STU *head) {
-    STU *stu = (STU *) malloc(sizeof(STU));
-    if (stu == NULL) {
-        printf("内存分配失败！");
-        exit(0);
-    }
-    readScore(stu);
-    doubleListAdd(head, stu);
-    g_studentNum++;
     int choice;
     do {
-        printf("是否继续录入？(1.是 2.否)");
-        scanf("%d", &choice);
-        if (choice == 1) {
-            stu = (STU *) malloc(sizeof(STU));
+        if (g_studentNum == 0) {    //如果是第一次录入成绩
+            readScore(head);
+            g_studentNum++;
+        } else {    //如果不是第一次录入成绩
+            STU *stu = (STU *) malloc(sizeof(STU));
             if (stu == NULL) {
                 printf("内存分配失败！");
                 exit(0);
@@ -41,13 +34,17 @@ void readScoreInfinite(STU *head) {
             readScore(stu);
             doubleListAdd(head, stu);
             g_studentNum++;
-        } else if (choice == 2) {
-            break;
-        } else {
-            printf("没有这个选项！");
-            Sleep(300);
         }
-    } while (choice != 2);
+        do {
+            printf("是否继续录入？");
+            printf("1.是\t2.否\n");
+            scanf("%d", &choice);
+            if (choice != 1 && choice != 2) {
+                printf("输入错误，请重新输入！\n");
+                Sleep(300);
+            }
+        } while (choice != 1 && choice != 2);
+    } while (choice == 1);
 }
 
 

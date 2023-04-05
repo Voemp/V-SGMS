@@ -8,4 +8,10 @@
 #include "Struct.h"
 #include "StudentDoubleList.h"
 
+/*函数功能：录入学生成绩（教师版）
+ * head：学生信息链表头指针
+ * 返回值：无
+ */
+void readScoreInfinite(STU *head);
+
 #endif //V_SGMS_GRADEMANAGEMENT_H

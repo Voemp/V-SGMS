@@ -14,7 +14,7 @@ STU *doubleListCreate() {
     return head;
 }
 
-//函数功能：学生信息链表添加
+//函数功能：学生信息链表添加（尾插法）
 void doubleListAdd(STU *head, STU *stu) {
     STU *end = head->pre;
     end->next = stu;

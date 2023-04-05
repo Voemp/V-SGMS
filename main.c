@@ -70,7 +70,7 @@ int main() {
                     choice2 = menuController(3, 3, 3, 6, coverStudentGradeManageMenu1);
                     switch (choice2) {
                         case 1:
-
+                            readScoreInfinite(head);
                             break;
                         case 2:
                             printf("2");
