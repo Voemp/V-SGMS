@@ -20,6 +20,10 @@ void readScore(STU *stu) {
 
 //函数功能：无限次录入成绩
 void readScoreInfinite(STU *head) {
+    system("cls");
+    printf("************************\n");
+    printf("*   学生成绩录入系统   *\n");
+    printf("************************\n");
     int choice;
     do {
         if (g_studentNum == 0) {    //如果是第一次录入成绩
@@ -45,6 +49,8 @@ void readScoreInfinite(STU *head) {
             }
         } while (choice != 1 && choice != 2);
     } while (choice == 1);
+    printf("录入完成！即将返回菜单。。。\n");
+    Sleep(500);
 }
 
 

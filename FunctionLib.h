@@ -20,7 +20,13 @@ void setCursor(int x, int y);
  *函数参数：lpTitle
  *函数返回值：无
  */
-VOID SetTitle(LPCSTR lpTitle);
+VOID setTitle(LPCSTR lpTitle);
+
+/*函数功能：设置窗口大小
+ *函数参数：width,height
+ *函数返回值：无
+ */
+void setWindowSize(int x, int y);
 
 /*函数功能：打开网页
  *函数参数：website

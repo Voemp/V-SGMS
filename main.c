@@ -12,7 +12,8 @@ int g_studentNum = 0;   //全局变量，用于存储学生数量
 USER *g_user = NULL;    //全局变量，用于存储当前登录用户的信息
 
 int main() {
-    SetTitle("V-SGMS 1.0");
+    setTitle("V-SGMS 1.0");
+    setWindowSize(479, 390);
     system("color f9");
     //welcomeInit();
     STU *head = doubleListCreate();
@@ -71,6 +72,7 @@ int main() {
                     switch (choice2) {
                         case 1:
                             readScoreInfinite(head);
+                            choice2 = 0;
                             break;
                         case 2:
                             printf("2");

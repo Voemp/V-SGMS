@@ -19,8 +19,16 @@ void setCursor(int x, int y) {
 }
 
 //函数功能：设置窗口标题
-VOID SetTitle(LPCSTR lpTitle) {
+VOID setTitle(LPCSTR lpTitle) {
     SetConsoleTitle(lpTitle);
+}
+
+//函数功能：设置窗口大小
+void setWindowSize(int x, int y) {
+    HWND hwnd = GetConsoleWindow();
+    RECT rect;
+    GetWindowRect(hwnd, &rect);
+    MoveWindow(hwnd, rect.left, rect.top, x, y, TRUE);
 }
 
 //函数功能：打开网页

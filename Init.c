@@ -295,6 +295,7 @@ int menuController(int line, int deta, int lower, int upper, void (*p)(int)) {
     IN_BLUE;
     (*p)(line - deta + 1);
     IN_WHITE;
+    Sleep(80);
     setCursor(0, upper + 6);
     return line - deta + 1;
 }
