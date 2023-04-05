@@ -21,43 +21,38 @@
 //函数功能：打印欢迎界面
 void welcomeInit();
 
-//函数功能：打印登录界面
-void loginMenu();
+//登录界面声明
+extern char *loginMenu[7];
 
-//函数功能：打印主菜单界面
-void mainMenu();
+//主菜单声明
+extern char *mainMenu[10];
 
-//函数功能：覆盖主菜单界面
-void coverMainMenu(int x);
+//学生成绩查询菜单（教师版）声明
+extern char *studentGradeQueryMenu1[12];
 
-//函数功能：打印学生成绩查询界面（教师版）
-void studentGradeQueryMenu1();
+//学生成绩管理界面声明
+extern char *studentGradeManageMenu1[8];
 
-//函数功能：覆盖学生成绩查询界面（教师版）
-void coverStudentGradeQueryMenu1(int x);
-
-//函数功能：打印学生成绩管理界面（教师版）
-void studentGradeManageMenu1();
-
-//函数功能：覆盖学生成绩管理界面（教师版）
-void coverStudentGradeManageMenu1(int x);
-
-//函数功能：退出程序确认界面
-void exitConfirmMenu();
-
-//函数功能：覆盖退出程序确认界面
-void coverExitConfirmMenu(int x);
+//退出程序确认界面声明
+extern char *exitConfirmMenu[6];
 
 //函数功能：关于界面
 void About();
 
+
+/*函数功能：绘制菜单
+ * **menu：选择哪个覆盖菜单
+ * RowSize：菜单的行数
+ * line：光标所在行
+ * confirm：是否确认
+ */
+void drawMenu(char *menu[], int RowSize, int line, int confirm);
+
 /*函数功能：用方向键选择菜单或者输入数字选择菜单
- * line：当前光标所在行数
- * deta：第一个选项所在行（行数从0开始计算）
  * upper, lower：选项的上下界所在行（上界为最后一个选项的行数，下界为第一个选项的行数）
- * (*P)(int)：函数指针，选择哪个覆盖菜单
+ * **menu：选择哪个覆盖菜单
  * 返回值：选择的选项（1~9）（引用时判断是否为已有选项，如果不是则重新选择）
  */
-int menuController(int line, int deta, int lower, int upper, void (*p)(int));
+int menuController(char *menu[], int lower, int upper);
 
 #endif //V_SGMS_INIT_H

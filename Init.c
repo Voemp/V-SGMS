@@ -35,185 +35,59 @@ void welcomeInit() {
     Sleep(400);
 }
 
-//函数功能：打印登录界面
-void loginMenu() {
-    system("cls");
-    printf("********************************\n");
-    printf("*           登录系统           *\n");
-    printf("********************************\n");
-    printf("*        1.登录已有帐号        *\n");
-    printf("*        2.注册新的帐号        *\n");
-    printf("*        3.退出程序            *\n");
-    printf("********************************\n");
-}
+//登录界面
+char *loginMenu[7] = {"********************************\0",
+                      "*           登录系统           *\0",
+                      "********************************\0",
+                      "*        1.登录已有帐号        *\0",
+                      "*        2.注册新的帐号        *\0",
+                      "*        3.退出程序            *\0",
+                      "********************************\0"};
 
-//函数功能：打印主菜单界面
-void mainMenu() {
-    system("cls");
-    printf("********************************\n");
-    printf("*           主菜单             *\n");
-    printf("********************************\n");
-    printf("*        1.学生成绩查询        *\n");
-    printf("*        2.学生成绩管理        *\n");
-    printf("*        3.修改密码            *\n");
-    printf("*        4.退出登录            *\n");
-    printf("*        5.退出程序            *\n");
-    printf("*        6.关于                *\n");
-    printf("********************************\n");
-    IN_REDWORD;
-    printf("请使用↑、↓和enter来实现选择和执行命令\n");
-    printf("或者输入每个命令前面的数字来执行命令\n");
-    IN_WHITE;
-    printf("********************************\n");
-}
+//主菜单
+char *mainMenu[10] = {"********************************\0",
+                      "*           主菜单             *\0",
+                      "********************************\0",
+                      "*        1.学生成绩查询        *\0",
+                      "*        2.学生成绩管理        *\0",
+                      "*        3.修改密码            *\0",
+                      "*        4.退出登录            *\0",
+                      "*        5.退出程序            *\0",
+                      "*        6.关于                *\0",
+                      "********************************\0"};
 
-//函数功能：覆盖主菜单界面
-void coverMainMenu(int x) {
-    switch (x) {
-        case 1:
-            printf("*        1.学生成绩查询        *\n");
-            break;
-        case 2:
-            printf("*        2.学生成绩管理        *\n");
-            break;
-        case 3:
-            printf("*        3.修改密码            *\n");
-            break;
-        case 4:
-            printf("*        4.退出登录            *\n");
-            break;
-        case 5:
-            printf("*        5.退出程序            *\n");
-            break;
-        case 6:
-            printf("*        6.关于                *\n");
-            break;
-        default:
-            break;
-    }
-}
+//学生成绩查询菜单（教师版）
+char *studentGradeQueryMenu1[12] = {"******************************************************\0",
+                                    "*                学生成绩查询（教师版）              *\0",
+                                    "******************************************************\0",
+                                    "*        1.查询每门课程的总分和平均分                *\0",
+                                    "*        2.按照每个学生的总分由高到低排出名次表      *\0",
+                                    "*        3.按照每个学生的总分由低到高排出名次表      *\0",
+                                    "*        4.按照学号由小到大排出成绩表                *\0",
+                                    "*        5.按照学号查询学生排名及其各科考试成绩      *\0",
+                                    "*        6.统计不同分数段的人数百分比                *\0",
+                                    "*        7.输出每个学生全部信息                      *\0",
+                                    "*        8.返回主菜单                                *\0",
+                                    "******************************************************\0"};
 
-//函数功能：打印学生成绩查询界面（教师版）
-void studentGradeQueryMenu1() {
-    system("cls");
-    printf("******************************************************\n");
-    printf("*                学生成绩查询（教师版）              *\n");
-    printf("******************************************************\n");
-    printf("*        1.查询每门课程的总分和平均分                *\n");
-    printf("*        2.按照每个学生的总分由高到低排出名次表      *\n");
-    printf("*        3.按照每个学生的总分由低到高排出名次表      *\n");
-    printf("*        4.按照学号由小到大排出成绩表                *\n");
-    printf("*        5.按照学号查询学生排名及其各科考试成绩      *\n");
-    printf("*        6.统计不同分数段的人数百分比                *\n");
-    printf("*        7.输出每个学生全部信息                      *\n");
-    printf("*        8.返回主菜单                                *\n");
-    printf("******************************************************\n");
-    IN_REDWORD;
-    printf("请使用↑、↓和enter来实现选择和执行命令\n");
-    printf("或者输入每个命令前面的数字来执行命令\n");
-    IN_WHITE;
-    printf("******************************************************\n");
-}
 
-//函数功能：覆盖学生成绩查询界面（教师版）
-void coverStudentGradeQueryMenu1(int x) {
-    switch (x) {
-        case 1:
-            printf("*        1.查询每门课程的总分和平均分                *\n");
-            break;
-        case 2:
-            printf("*        2.按照每个学生的总分由高到低排出名次表      *\n");
-            break;
-        case 3:
-            printf("*        3.按照每个学生的总分由低到高排出名次表      *\n");
-            break;
-        case 4:
-            printf("*        4.按照学号由小到大排出成绩表                *\n");
-            break;
-        case 5:
-            printf("*        5.按照学号查询学生排名及其各科考试成绩      *\n");
-            break;
-        case 6:
-            printf("*        6.统计不同分数段的人数百分比                *\n");
-            break;
-        case 7:
-            printf("*        7.输出每个学生全部信息                      *\n");
-            break;
-        case 8:
-            printf("*        8.返回主菜单                                *\n");
-            break;
-        default:
-            break;
-    }
-}
+//学生成绩管理菜单（教师版）
+char *studentGradeManageMenu1[8] = {"*********************************\0",
+                                    "*     学生成绩管理（教师版）    *\0",
+                                    "*********************************\0",
+                                    "*       1.添加学生成绩          *\0",
+                                    "*       2.修改学生成绩          *\0",
+                                    "*       3.删除学生成绩          *\0",
+                                    "*       4.返回主菜单            *\0",
+                                    "*********************************\0"};
 
-//函数功能：打印学生成绩管理界面（教师版）
-void studentGradeManageMenu1() {
-    system("cls");
-    printf("*********************************\n");
-    printf("*     学生成绩管理（教师版）    *\n");
-    printf("*********************************\n");
-    printf("*       1.添加学生成绩          *\n");
-    printf("*       2.修改学生成绩          *\n");
-    printf("*       3.删除学生成绩          *\n");
-    printf("*       4.返回主菜单            *\n");
-    printf("*********************************\n");
-    IN_REDWORD;
-    printf("请使用↑、↓和enter来实现选择和执行命令\n");
-    printf("或者输入每个命令前面的数字来执行命令\n");
-    IN_WHITE;
-    printf("*****************************\n");
-}
-
-//函数功能：覆盖学生成绩管理界面（教师版）
-void coverStudentGradeManageMenu1(int x) {
-    switch (x) {
-        case 1:
-            printf("*       1.添加学生成绩          *\n");
-            break;
-        case 2:
-            printf("*       2.修改学生成绩          *\n");
-            break;
-        case 3:
-            printf("*       3.删除学生成绩          *\n");
-            break;
-        case 4:
-            printf("*       4.返回主菜单            *\n");
-            break;
-        default:
-            break;
-    }
-}
-
-//函数功能：退出程序确认界面
-void exitConfirmMenu() {
-    system("cls");
-    printf("********************************\n");
-    printf("*           退出程序           *\n");
-    printf("********************************\n");
-    printf("*        1.确认退出程序        *\n");
-    printf("*        2.返回主菜单          *\n");
-    printf("********************************\n");
-    IN_REDWORD;
-    printf("请使用↑、↓和enter来实现选择和执行命令\n");
-    printf("或者输入每个命令前面的数字来执行命令\n");
-    IN_WHITE;
-    printf("********************************\n");
-}
-
-//函数功能：覆盖退出程序确认
-void coverExitConfirmMenu(int x) {
-    switch (x) {
-        case 1:
-            printf("*        1.确认退出程序        *\n");
-            break;
-        case 2:
-            printf("*        2.返回主菜单          *\n");
-            break;
-        default:
-            break;
-    }
-}
+//退出程序确认界面
+char *exitConfirmMenu[6] = {"********************************\0",
+                            "*           退出程序           *\0",
+                            "********************************\0",
+                            "*        1.确认退出程序        *\0",
+                            "*        2.返回上一级          *\0",
+                            "********************************\0"};
 
 //函数功能：关于界面
 void About() {
@@ -244,58 +118,77 @@ void About() {
     } while (1);
 }
 
+/*函数功能：绘制菜单
+ * **menu：选择哪个覆盖菜单
+ * RowSize：菜单的行数
+ * line：光标所在行
+ * confirm：是否确认
+ */
+void drawMenu(char *menu[], int RowSize, int line, int confirm) {
+    setCursor(0, 0);    //将光标移动到左上角
+    //int LineSize = strlen((char *) menu) + 1;   //计算每一行的长度
+    for (int i = 0; i < RowSize; ++i) {
+        if (i == line) {
+            if (confirm == 0) {
+                IN_CYAN;
+                printf("%s\n", menu[i]);
+            } else {
+                IN_BLUE;
+                printf("%s\n", menu[i]);
+            }
+            IN_WHITE;
+        } else {
+            printf("%s\n", menu[i]);
+        }
+    }
+    IN_REDWORD;
+    printf("请使用↑、↓和enter来实现选择和执行命令\n");
+    printf("或者输入每个命令前面的数字来执行命令\n");
+    printf("按ESC键返回上一级\n");
+    IN_WHITE;
+    printf("%s\n\n", menu[0]);
+}
+
+
 /*函数功能：用方向键选择菜单或者输入数字选择菜单
- * line：当前光标所在行数
- * deta：第一个选项所在行（行数从0开始计算）
  * upper, lower：选项的上下界所在行（上界为最后一个选项的行数，下界为第一个选项的行数）
- * (*P)(int)：函数指针，选择哪个覆盖菜单
+ * **menu：选择哪个覆盖菜单
  * 返回值：选择的选项（1~9）（引用时判断是否为已有选项，如果不是则重新选择）
  */
-int menuController(int line, int deta, int lower, int upper, void (*p)(int)) {
+int menuController(char *menu[], int lower, int upper) {
+    system("cls");
+    int confirm = 0, line = lower;  //line为光标所在行
+    drawMenu(menu, upper + 2, line, confirm);   //绘制菜单
     char c1, c2;
-    setCursor(0, line);
-    IN_CYAN;
-    (*p)(line - deta + 1);
-    setCursor(0, upper + 6);
     while ((c1 = getch()) != '\r') {
-        if (c1 >= '0' && c1 <= '9') {   //如果输入的是数字，则直接返回
-            setCursor(0, upper + 6);
-            IN_WHITE;
+        if (c1 == 27) {
+            if (strcmp(menu[1], "*           退出程序           *") == 0) {
+                return 2;
+            }
+            int choice = menuController(exitConfirmMenu, 3, 4);
+            if (choice == 1) {
+                exit(0);
+            } else {
+                system("cls");
+                drawMenu(menu, upper + 2, line, confirm);
+            }
+
+        } else if (c1 >= '0' && c1 <= '9') {   //如果输入的是数字，则直接返回
             return c1 - '0';
         } else if (c1 == -32) {
             c2 = getch();
             if (c2 == DOWNKEY) {
-                setCursor(0, line);
-                IN_WHITE;    //恢复默认色
-                (*p)(line - deta + 1);    //覆盖，实现退选
-                if (line == upper)    //如果已经到了上界，则返回下界，实现滚动高亮
-                    line = lower;
-                else
-                    ++line;    //行数+1
-                setCursor(0, line);
-                IN_CYAN;    //选择高亮色
-                (*p)(line - deta + 1);    //覆盖，实现选中
+                if (line == upper) line = lower - 1;
+                drawMenu(menu, upper + 2, ++line, confirm);
             }
             if (c2 == UPKEY) {
-                setCursor(0, line);
-                IN_WHITE;    //恢复默认色
-                (*p)(line - deta + 1);
-                if (line == lower)    //如果已经到了下界，则返回上界，实现滚动高亮
-                    line = upper;
-                else
-                    --line;    //行数-1
-                setCursor(0, line);
-                IN_CYAN;    //选择高亮色
-                (*p)(line - deta + 1);
+                if (line == lower) line = upper + 1;
+                drawMenu(menu, upper + 2, --line, confirm);
             }
-            setCursor(0, upper + 6);
         }
     }
-    setCursor(0, line);
-    IN_BLUE;
-    (*p)(line - deta + 1);
-    IN_WHITE;
+    confirm = 1;
+    drawMenu(menu, upper + 2, line, confirm);
     Sleep(80);
-    setCursor(0, upper + 6);
-    return line - deta + 1;
+    return line - lower + 1;
 }

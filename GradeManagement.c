@@ -12,8 +12,8 @@ void readScore(STU *stu) {
     printf("请输入姓名：");
     scanf("%s", stu->studentName);
     for (int i = 0; i < g_subjectNum; ++i) {
-        printf("请输入第%d门的成绩：", stu->score[i].subjectName);
         stu->score[i].subjectName = i + 1;
+        printf("请输入第%d门的成绩：", stu->score[i].subjectName);
         scanf("%d", &stu->score[i].subjectScore);
     }
 }

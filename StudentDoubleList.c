@@ -4,7 +4,7 @@
 
 //函数功能：学生信息链表初始化
 STU *doubleListCreate() {
-    STU *head = (STU *) malloc(sizeof(STU));
+    STU *head = (STU *) calloc(sizeof(STU), 1);
     if (head == NULL) {
         printf("内存分配失败！");
         exit(0);

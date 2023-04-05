@@ -7,23 +7,22 @@
 #include "GradeManagement.h"
 #include "StudentDoubleList.h"
 
-int g_subjectNum = 0;   //全局变量，用于存储科目数量
+int g_subjectNum = 6;   //全局变量，用于存储科目数量
 int g_studentNum = 0;   //全局变量，用于存储学生数量
 USER *g_user = NULL;    //全局变量，用于存储当前登录用户的信息
 
 int main() {
     setTitle("V-SGMS 1.0");
-    setWindowSize(479, 390);
+    //setWindowSize(479, 390);
     system("color f9");
     //welcomeInit();
-    STU *head = doubleListCreate();
+    STU *head = doubleListCreate();    //创建学生信息链表
 
-    USER *temp_user = (USER *) calloc(sizeof(USER), 1);
-    loginMod(temp_user, 6, 3);
-    /*int choice1, choice2;
+    //USER *temp_user = (USER *) calloc(sizeof(USER), 1);
+    //loginMod(temp_user, 6, 3);
+    int choice1, choice2;
     do {
-        mainMenu();
-        choice1 = menuController(3, 3, 3, 8, coverMainMenu);
+        choice1 = menuController(mainMenu, 3, 8);
         switch (choice1) {
             case 0:
                 printf("这是个小彩蛋，嘻嘻！");
@@ -31,8 +30,7 @@ int main() {
                 break;
             case 1:
                 do {
-                    studentGradeQueryMenu1();
-                    choice2 = menuController(3, 3, 3, 10, coverStudentGradeQueryMenu1);
+                    choice2 = menuController(studentGradeQueryMenu1, 3, 10);
                     switch (choice2) {
                         case 1:
                             printf("1");
@@ -67,8 +65,7 @@ int main() {
                 break;
             case 2:
                 do {
-                    studentGradeManageMenu1();
-                    choice2 = menuController(3, 3, 3, 6, coverStudentGradeManageMenu1);
+                    choice2 = menuController(studentGradeManageMenu1, 3, 6);
                     switch (choice2) {
                         case 1:
                             readScoreInfinite(head);
@@ -97,9 +94,8 @@ int main() {
                 printf("4");
                 break;
             case 5:
-                exitConfirmMenu();
-                choice1 = menuController(3, 3, 3, 4, coverExitConfirmMenu);
-                if (choice1 == 1) {
+                choice2 = menuController(exitConfirmMenu, 3, 4);
+                if (choice2 == 1) {
                     exit(0);
                 } else {
                     choice1 = 0;
@@ -115,7 +111,6 @@ int main() {
                 break;
         }
     } while (choice1 < 1 || choice1 > 6);
-    */
     system("pause");
     return 0;
 }
