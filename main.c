@@ -18,9 +18,9 @@ int main() {
     //welcomeInit();
     STU *head = doubleListCreate();
 
-    //USER *temp_user = (USER *) malloc(sizeof(USER));
-    //loginMod(temp_user, 6, 3);
-    int choice1, choice2;
+    USER *temp_user = (USER *) calloc(sizeof(USER), 1);
+    loginMod(temp_user, 6, 3);
+    /*int choice1, choice2;
     do {
         mainMenu();
         choice1 = menuController(3, 3, 3, 8, coverMainMenu);
@@ -115,6 +115,7 @@ int main() {
                 break;
         }
     } while (choice1 < 1 || choice1 > 6);
+    */
     system("pause");
     return 0;
 }
