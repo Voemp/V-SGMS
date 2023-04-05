@@ -10,7 +10,7 @@ int loginMod(USER *temp_user, int x, int y) {
     char ch;
     system("cls");
     printf("********************\n");
-    printf("        登录\n");
+    printf("*       登录       *\n");
     printf("********************\n");
     printf("帐号：\n");
     printf("密码：\n");
@@ -48,10 +48,10 @@ int loginMod(USER *temp_user, int x, int y) {
         }
         if (ch == '\r') {    //判断是否为回车键
             if (pos.Y == y) {   //如果光标在“帐号：”处
-                temp_user->account[i + 1] = '\0';    //将帐号的最后一个字符设为'\0'
+                temp_user->account[i] = '\0';    //将帐号的最后一个字符设为'\0'
                 setCursor(x + j, y + 1);    //将光标移动到“密码：”处
             } else if (pos.Y == y + 1) {  //如果光标在“密码：”处
-                temp_user->password[j + 1] = '\0';    //将密码的最后一个字符设为'\0'
+                temp_user->password[j] = '\0';    //将密码的最后一个字符设为'\0'
                 break;  //退出循环
             }
         } else if (ch == TEMPKEY) {    //判断是否为方向键
@@ -111,19 +111,13 @@ int loginMod(USER *temp_user, int x, int y) {
         }
     } while (temp_y == y || temp_y == y + 1);    //如果光标在“帐号：”或“密码：”处，则继续循环
     setCursor(0, y + 3);    //将光标移动到“密码：”下面一行
-
     FILE *fp;
-    if ((fp = fopen("user.txt", "wb")) == NULL) {    //判断文件是否打开成功
+    if ((fp = fopen("user.txt", "rb")) == NULL) {    //判断文件是否打开成功
         printf("文件打开失败！\n");
         Sleep(1000);
         exit(0);
     }
-    fwrite(temp_user, sizeof(USER), 1, fp);    //将用户信息写入文件
-    fclose(fp);    //关闭文件
-    fp = fopen("user.txt", "rb");
     fread(&local_user, sizeof(USER), 1, fp);    //读取文件中的用户信息
-    printf("account = %s\n", local_user.account);
-    printf("password = %s\n", local_user.password);
     while (1) {
         if (strcmp(temp_user->account, local_user.account) == 0 &&
             strcmp(temp_user->password, local_user.password) == 0) {    //判断帐号和密码是否正确
