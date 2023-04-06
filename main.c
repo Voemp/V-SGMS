@@ -22,7 +22,7 @@ int main() {
     //loginMod(temp_user, 6, 3);
     int choice1, choice2;
     do {
-        choice1 = menuController(mainMenu, 3, 8);
+        choice1 = menuController(mainMenu, 6);
         switch (choice1) {
             case 0:
                 printf("这是个小彩蛋，嘻嘻！");
@@ -30,7 +30,7 @@ int main() {
                 break;
             case 1:
                 do {
-                    choice2 = menuController(studentGradeQueryMenu1, 3, 10);
+                    choice2 = menuController(studentGradeQueryMenu1, 8);
                     switch (choice2) {
                         case 1:
                             printf("1");
@@ -65,7 +65,7 @@ int main() {
                 break;
             case 2:
                 do {
-                    choice2 = menuController(studentGradeManageMenu1, 3, 6);
+                    choice2 = menuController(studentGradeManageMenu1, 4);
                     switch (choice2) {
                         case 1:
                             readScoreInfinite(head);
@@ -94,16 +94,16 @@ int main() {
                 printf("4");
                 break;
             case 5:
-                choice2 = menuController(exitConfirmMenu, 3, 4);
+                About();
+                choice1 = 0;
+                break;
+            case 6:
+                choice2 = menuController(exitConfirmMenu, 2);
                 if (choice2 == 1) {
                     exit(0);
                 } else {
                     choice1 = 0;
                 }
-                break;
-            case 6:
-                About();
-                choice1 = 0;
                 break;
             default:
                 printf("没有这个选项！");

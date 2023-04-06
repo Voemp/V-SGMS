@@ -49,10 +49,10 @@ void About();
 void drawMenu(char *menu[], int RowSize, int line, int confirm);
 
 /*函数功能：用方向键选择菜单或者输入数字选择菜单
- * upper, lower：选项的上下界所在行（上界为最后一个选项的行数，下界为第一个选项的行数）
  * **menu：选择哪个覆盖菜单
+ * choice_num：菜单选项的个数
  * 返回值：选择的选项（1~9）（引用时判断是否为已有选项，如果不是则重新选择）
  */
-int menuController(char *menu[], int lower, int upper);
+int menuController(char *menu[], int choice_num);
 
 #endif //V_SGMS_INIT_H

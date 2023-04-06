@@ -52,8 +52,8 @@ char *mainMenu[10] = {"********************************\0",
                       "*        2.学生成绩管理        *\0",
                       "*        3.修改密码            *\0",
                       "*        4.退出登录            *\0",
-                      "*        5.退出程序            *\0",
-                      "*        6.关于                *\0",
+                      "*        5.关于                *\0",
+                      "*        6.退出程序            *\0",
                       "********************************\0"};
 
 //学生成绩查询菜单（教师版）
@@ -151,28 +151,19 @@ void drawMenu(char *menu[], int RowSize, int line, int confirm) {
 
 
 /*函数功能：用方向键选择菜单或者输入数字选择菜单
- * upper, lower：选项的上下界所在行（上界为最后一个选项的行数，下界为第一个选项的行数）
  * **menu：选择哪个覆盖菜单
+ * choice_num：菜单选项的个数
  * 返回值：选择的选项（1~9）（引用时判断是否为已有选项，如果不是则重新选择）
  */
-int menuController(char *menu[], int lower, int upper) {
+int menuController(char *menu[], int choice_num) {
     system("cls");
-    int confirm = 0, line = lower;  //line为光标所在行
+    //lower为第一个选项的行数，upper为最后一个选项的行数, line为光标所在行
+    int confirm = 0, lower = 3, upper = lower + choice_num - 1, line = lower;
     drawMenu(menu, upper + 2, line, confirm);   //绘制菜单
     char c1, c2;
     while ((c1 = getch()) != '\r') {
         if (c1 == 27) {
-            if (strcmp(menu[1], "*           退出程序           *") == 0) {
-                return 2;
-            }
-            int choice = menuController(exitConfirmMenu, 3, 4);
-            if (choice == 1) {
-                exit(0);
-            } else {
-                system("cls");
-                drawMenu(menu, upper + 2, line, confirm);
-            }
-
+            return choice_num;
         } else if (c1 >= '0' && c1 <= '9') {   //如果输入的是数字，则直接返回
             return c1 - '0';
         } else if (c1 == -32) {
