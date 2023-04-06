@@ -54,14 +54,17 @@ int main() {
                             system("cls");
                             doubleListPrint(head);
                             break;
-                        case 8:
+                        case 8: //返回上一级菜单
                             break;
                         default:
                             printf("没有这个选项！");
                             Sleep(300);
                             break;
                     }
-                    getch();
+                    if (choice2 != 8) { //如果不是返回上一级菜单，就暂停
+                        printf("按任意键继续。。。");
+                        getch();    //暂停
+                    }
                     choice1 = 0;
                 } while (choice2 < 1 || choice2 > 8);
                 break;
@@ -80,14 +83,13 @@ int main() {
                             printf("3");
                             break;
                         case 4:
+                            choice1 = 0;
                             break;
                         default:
                             printf("没有这个选项！");
                             Sleep(300);
                             break;
                     }
-                    getch();
-                    choice1 = 0;
                     doubleListWriteToFile(head);
                 } while (choice2 < 1 || choice2 > 4);
                 break;
