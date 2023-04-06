@@ -58,6 +58,10 @@ STU *doubleListReadFromFile() {
     }
     STU *head = doubleListCreate();
     while (!feof(fp)) {
+        fgetc(fp);    //先读一次，下面再判断是否文件结束，结束则跳出循环
+        if (feof(fp))
+            break;
+        fseek(fp, -1, 1);       //如果a这个值不使用，记得前移文件指针
         STU *stu = (STU *) calloc(sizeof(STU), 1);
         if (stu == NULL) {
             printf("内存分配失败！");
