@@ -31,7 +31,6 @@ void readScoreInfinite(STU *head) {
         readScore(stu);
         doubleListAdd(head, stu);
         g_studentNum++;
-
         do {
             printf("是否继续录入？");
             printf("1.是\t2.否\n");
@@ -43,7 +42,6 @@ void readScoreInfinite(STU *head) {
         } while (choice != 1 && choice != 2);
     } while (choice == 1);
     printf("录入完成！即将返回菜单。。。\n");
-    doubleListWriteToFile(head);
     Sleep(500);
 }
 

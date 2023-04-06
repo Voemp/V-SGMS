@@ -41,7 +41,6 @@ void doubleListWriteToFile(STU *head) {
         printf("文件打开失败！");
         exit(0);
     }
-    fwrite(head, sizeof(STU), 1, fp);
     STU *temp = head->next;
     while (temp != NULL) {
         fwrite(temp, sizeof(STU), 1, fp);
@@ -58,11 +57,6 @@ STU *doubleListReadFromFile() {
         exit(0);
     }
     STU *head = doubleListCreate();
-    STU *stu = (STU *) calloc(sizeof(STU), 1);
-    if (stu == NULL) {
-        printf("内存分配失败！");
-        exit(0);
-    }
     while (!feof(fp)) {
         STU *stu = (STU *) calloc(sizeof(STU), 1);
         if (stu == NULL) {
