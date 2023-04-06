@@ -1,9 +1,6 @@
 // Created by VoidEmpty on 2023/4/3.
 #include "GradeManagement.h"
 
-extern int g_subjectNum;
-extern int g_studentNum;
-
 
 //函数功能：录入成绩
 void readScore(STU *stu) {
@@ -26,19 +23,15 @@ void readScoreInfinite(STU *head) {
     printf("************************\n");
     int choice;
     do {
-        if (g_studentNum == 0) {    //如果是第一次录入成绩
-            readScore(head);
-            g_studentNum++;
-        } else {    //如果不是第一次录入成绩
-            STU *stu = (STU *) malloc(sizeof(STU));
-            if (stu == NULL) {
-                printf("内存分配失败！");
-                exit(0);
-            }
-            readScore(stu);
-            doubleListAdd(head, stu);
-            g_studentNum++;
+        STU *stu = (STU *) calloc(sizeof(STU), 1);
+        if (stu == NULL) {
+            printf("内存分配失败！");
+            exit(0);
         }
+        readScore(stu);
+        doubleListAdd(head, stu);
+        g_studentNum++;
+
         do {
             printf("是否继续录入？");
             printf("1.是\t2.否\n");
@@ -50,6 +43,7 @@ void readScoreInfinite(STU *head) {
         } while (choice != 1 && choice != 2);
     } while (choice == 1);
     printf("录入完成！即将返回菜单。。。\n");
+    doubleListWriteToFile(head);
     Sleep(500);
 }
 
