@@ -2,7 +2,7 @@
 
 #include "StudentDoubleList.h"
 
-//函数功能：双向链表初始化
+//函数功能：学生信息链表初始化
 STU *doubleListCreate() {
     STU *head = (STU *) calloc(sizeof(STU), 1);
     if (head == NULL) {
@@ -14,7 +14,7 @@ STU *doubleListCreate() {
     return head;
 }
 
-//函数功能：双向链表添加（尾插法）
+//函数功能：学生信息链表添加（尾插法）
 void doubleListAdd(STU *head, STU *stu) {
     STU *end = head->pre;   //end指向链表尾节点
     end->next = stu;    //尾节点的next指向新节点
@@ -23,7 +23,7 @@ void doubleListAdd(STU *head, STU *stu) {
     head->pre = stu;    //头节点的pre指向新节点
 }
 
-//函数功能：双向链表插入
+//函数功能：学生信息链表插入
 void doubleListInsert(STU *head, STU *stu) {
     STU *temp = head;
     while (temp->next != NULL) {
@@ -34,7 +34,7 @@ void doubleListInsert(STU *head, STU *stu) {
     stu->next = NULL;
 }
 
-//函数功能：双向链表写入文件
+//函数功能：学生信息链表写入文件
 void doubleListWriteToFile(STU *head) {
     FILE *fp = fopen("StudentInfo.txt", "wb");
     if (fp == NULL) {
@@ -49,7 +49,7 @@ void doubleListWriteToFile(STU *head) {
     fclose(fp);
 }
 
-//函数功能：双向链表读取文件
+//函数功能：学生信息链表读取文件
 STU *doubleListReadFromFile() {
     FILE *fp = fopen("StudentInfo.txt", "rb");
     if (fp == NULL) {
@@ -74,7 +74,18 @@ STU *doubleListReadFromFile() {
     return head;
 }
 
-//函数功能：双向链表打印
+//函数功能：链表释放
+void doubleListFree(STU *head) {
+    STU *temp = head->next;
+    while (temp != NULL) {
+        STU *temp2 = temp->next;
+        free(temp);
+        temp = temp2;
+    }
+    free(head);
+}
+
+//函数功能：学生信息链表打印
 void doubleListPrint(STU *head) {
     STU *temp = head->next;
     while (temp != NULL) {

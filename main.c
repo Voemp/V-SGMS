@@ -16,7 +16,6 @@ int main() {
     //setWindowSize(479, 390);
     system("color f9");
     //welcomeInit();
-    STU *head = doubleListReadFromFile();    //从文件读取学生信息
 
     //USER *temp_user = (USER *) calloc(sizeof(USER), 1);
     //loginMod(temp_user, 6, 3);

@@ -17,12 +17,12 @@ void readScore(STU *stu) {
 
 //函数功能：无限次录入成绩
 void readScoreInfinite(STU *head) {
-    system("cls");
-    printf("************************\n");
-    printf("*   学生成绩录入系统   *\n");
-    printf("************************\n");
     int choice;
     do {
+        system("cls");
+        printf("************************\n");
+        printf("*   学生成绩录入系统   *\n");
+        printf("************************\n");
         STU *stu = (STU *) calloc(sizeof(STU), 1);
         if (stu == NULL) {
             printf("内存分配失败！");
@@ -32,15 +32,17 @@ void readScoreInfinite(STU *head) {
         doubleListAdd(head, stu);
         g_studentNum++;
         do {
-            printf("是否继续录入？");
+            printf("是否继续录入？\n");
+            IN_CYAN;
             printf("1.是\t2.否\n");
-            scanf("%d", &choice);
-            if (choice != 1 && choice != 2) {
+            IN_WHITE;
+            choice = getch();
+            if (choice != '1' && choice != '2') {
                 printf("输入错误，请重新输入！\n");
                 Sleep(300);
             }
-        } while (choice != 1 && choice != 2);
-    } while (choice == 1);
+        } while (choice != '1' && choice != '2');
+    } while (choice == '1');
     printf("录入完成！即将返回菜单。。。\n");
     Sleep(500);
 }
@@ -49,4 +51,11 @@ void readScoreInfinite(STU *head) {
 //函数功能：查询每门课程的总分和平均分
 void queryTotalAndAverageScore(STU *stu) {
 
+}
+
+//函数功能：通用的功能调用函数
+void commonFunction(int (*func)(STU *head)) {
+    STU *head = doubleListReadFromFile();
+    func(head);
+    doubleListFree(head);
 }
