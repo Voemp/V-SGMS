@@ -52,10 +52,3 @@ void readScoreInfinite(STU *head) {
 void queryTotalAndAverageScore(STU *stu) {
 
 }
-
-//函数功能：通用的功能调用函数
-void commonFunction(int (*func)(STU *head)) {
-    STU *head = doubleListReadFromFile();
-    func(head);
-    doubleListFree(head);
-}

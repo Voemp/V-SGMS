@@ -16,7 +16,7 @@ int main() {
     //setWindowSize(479, 390);
     system("color f9");
     //welcomeInit();
-
+    STU *head = NULL;   //学生信息链表头指针
     //USER *temp_user = (USER *) calloc(sizeof(USER), 1);
     //loginMod(temp_user, 6, 3);
     int choice1, choice2;
@@ -30,6 +30,7 @@ int main() {
             case 1: //学生成绩查询
                 do {
                     choice2 = menuController(studentGradeQueryMenu1, 8);
+                    head = doubleListReadFromFile();
                     switch (choice2) {
                         case 1: //查询每门课程的总分和平均分
                             printf("1");
@@ -65,11 +66,13 @@ int main() {
                         getch();    //暂停
                     }
                     choice1 = 0;
+                    doubleListFree(head);
                 } while (choice2 < 1 || choice2 > 8);
                 break;
             case 2: //学生成绩管理
                 do {
                     choice2 = menuController(studentGradeManageMenu1, 4);
+                    head = doubleListReadFromFile();
                     switch (choice2) {
                         case 1:
                             readScoreInfinite(head);
@@ -90,6 +93,7 @@ int main() {
                             break;
                     }
                     doubleListWriteToFile(head);
+                    doubleListFree(head);
                 } while (choice2 < 1 || choice2 > 4);
                 break;
             case 3: //修改密码
