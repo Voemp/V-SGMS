@@ -7,7 +7,7 @@
 #include "GradeManagement.h"
 #include "StudentDoubleList.h"
 
-int g_subjectNum = 6;   //全局变量，用于存储科目数量
+int g_subjectNum = 6;   //全局变量，用于存储科目数量//可以存在文件中，老师可以修改，修改后重启程序
 int g_studentNum = 0;   //全局变量，用于存储学生数量
 USER *g_user = NULL;    //全局变量，用于存储当前登录用户的信息
 
