@@ -2,11 +2,11 @@
 
 #include "StudentDoubleList.h"
 
-//�������ܣ�ѧ����Ϣ������ʼ��
+//函数功能：学生信息链表初始化
 STU *doubleListCreate() {
     STU *head = (STU *) calloc(sizeof(STU), 1);
     if (head == NULL) {
-        printf("�ڴ����ʧ�ܣ�");
+        printf("内存分配失败！");
         exit(0);
     }
     head->pre = head;
@@ -14,16 +14,16 @@ STU *doubleListCreate() {
     return head;
 }
 
-//�������ܣ�ѧ����Ϣ�������ӣ�β�巨��
+//函数功能：学生信息链表添加（尾插法）
 void doubleListAdd(STU *head, STU *stu) {
-    STU *end = head->pre;   //endָ������β�ڵ�
-    end->next = stu;    //β�ڵ��nextָ���½ڵ�
-    stu->pre = end;    //�½ڵ��preָ��β�ڵ�
-    stu->next = NULL;   //�½ڵ��nextָ��NULL
-    head->pre = stu;    //ͷ�ڵ��preָ���½ڵ�
+    STU *end = head->pre;   //end指向链表尾节点
+    end->next = stu;    //尾节点的next指向新节点
+    stu->pre = end;    //新节点的pre指向尾节点
+    stu->next = NULL;   //新节点的next指向NULL
+    head->pre = stu;    //头节点的pre指向新节点
 }
 
-//�������ܣ�ѧ����Ϣ��������
+//函数功能：学生信息链表插入
 void doubleListInsert(STU *head, STU *stu) {
     STU *temp = head;
     while (temp->next != NULL) {
@@ -34,11 +34,11 @@ void doubleListInsert(STU *head, STU *stu) {
     stu->next = NULL;
 }
 
-//�������ܣ�ѧ����Ϣ����д���ļ�
+//函数功能：学生信息链表写入文件
 void doubleListWriteToFile(STU *head) {
     FILE *fp = fopen("StudentInfo.txt", "wb");
     if (fp == NULL) {
-        printf("�ļ���ʧ�ܣ�");
+        printf("文件打开失败！");
         exit(0);
     }
     STU *temp = head->next;
@@ -49,22 +49,22 @@ void doubleListWriteToFile(STU *head) {
     fclose(fp);
 }
 
-//�������ܣ�ѧ����Ϣ������ȡ�ļ�
+//函数功能：学生信息链表读取文件
 STU *doubleListReadFromFile() {
     FILE *fp = fopen("StudentInfo.txt", "rb");
     if (fp == NULL) {
-        printf("�ļ���ʧ�ܣ�");
+        printf("文件打开失败！");
         exit(0);
     }
     STU *head = doubleListCreate();
     while (!feof(fp)) {
-        fgetc(fp);    //�ȶ�һ�Σ��������ж��Ƿ��ļ�����������������ѭ��
+        fgetc(fp);    //先读一次，下面再判断是否文件结束，结束则跳出循环
         if (feof(fp))
             break;
-        fseek(fp, -1, 1);       //���a���ֵ��ʹ�ã��ǵ�ǰ���ļ�ָ��
+        fseek(fp, -1, 1);       //如果a这个值不使用，记得前移文件指针
         STU *stu = (STU *) calloc(sizeof(STU), 1);
         if (stu == NULL) {
-            printf("�ڴ����ʧ�ܣ�");
+            printf("内存分配失败！");
             exit(0);
         }
         fread(stu, sizeof(STU), 1, fp);
@@ -74,7 +74,7 @@ STU *doubleListReadFromFile() {
     return head;
 }
 
-//�������ܣ������ͷ�
+//函数功能：链表释放
 void doubleListFree(STU *head) {
     STU *temp = head->next;
     while (temp != NULL) {
@@ -85,17 +85,17 @@ void doubleListFree(STU *head) {
     free(head);
 }
 
-//�������ܣ�ѧ����Ϣ������ӡ
+//函数功能：学生信息链表打印
 void doubleListPrint(STU *head) {
     STU *temp = head->next;
     while (temp != NULL) {
-        printf("%-16s%s", temp->studentID, temp->studentName);
+        printf("%-16s%-10s", temp->studentID, temp->studentName);
         for (int i = 0; i < g_subjectNum; ++i) {
-            printf("\t%d", temp->score[i].subjectName, temp->score[i].subjectScore);
+            printf("\t%.1f", temp->score[i].subjectScore);
         }
         printf("\n");
         temp = temp->next;
     }
 }
 
-//�������ܣ�ѧ����Ϣ��������
+//函数功能：学生信息链表排序
