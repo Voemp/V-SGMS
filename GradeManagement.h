@@ -15,10 +15,16 @@
 extern int g_subjectNum;
 extern int g_studentNum;
 
-/*º¯Êı¹¦ÄÜ£ºÂ¼ÈëÑ§Éú³É¼¨£¨½ÌÊ¦°æ£©
- * head£ºÑ§ÉúĞÅÏ¢Á´±íÍ·Ö¸Õë
- * ·µ»ØÖµ£ºÎŞ
+//å‡½æ•°åŠŸèƒ½ï¼šä»æ–‡ä»¶è¯»å–ç¨‹åºåŸºæœ¬ä¿¡æ¯
+void readBasicInfo();
+
+/*å‡½æ•°åŠŸèƒ½ï¼šå½•å…¥å­¦ç”Ÿæˆç»©ï¼ˆæ•™å¸ˆç‰ˆï¼‰
+ * headï¼šå­¦ç”Ÿä¿¡æ¯é“¾è¡¨å¤´æŒ‡é’ˆ
+ * è¿”å›å€¼ï¼šæ— 
  */
 void readScoreInfinite(STU *head);
+
+//å‡½æ•°åŠŸèƒ½ï¼šæŸ¥è¯¢æ¯é—¨è¯¾ç¨‹çš„æ€»åˆ†å’Œå¹³å‡åˆ†
+void queryTotalAndAverageScore(STU *stu);
 
 #endif //V_SGMS_GRADEMANAGEMENT_H
