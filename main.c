@@ -7,41 +7,45 @@
 #include "GradeManagement.h"
 #include "StudentDoubleList.h"
 
-int g_subjectNum = 6;   //È«¾Ö±äÁ¿£¬ÓÃÓÚ´æ´¢¿ÆÄ¿ÊıÁ¿//¿ÉÒÔ´æÔÚÎÄ¼şÖĞ£¬ÀÏÊ¦¿ÉÒÔĞŞ¸Ä£¬ĞŞ¸ÄºóÖØÆô³ÌĞò
-int g_studentNum = 0;   //È«¾Ö±äÁ¿£¬ÓÃÓÚ´æ´¢Ñ§ÉúÊıÁ¿
-USER *g_user = NULL;    //È«¾Ö±äÁ¿£¬ÓÃÓÚ´æ´¢µ±Ç°µÇÂ¼ÓÃ»§µÄĞÅÏ¢
+int g_subjectNum = 6;   //å…¨å±€å˜é‡ï¼Œç”¨äºå­˜å‚¨ç§‘ç›®æ•°é‡//å¯ä»¥å­˜åœ¨æ–‡ä»¶ä¸­ï¼Œè€å¸ˆå¯ä»¥ä¿®æ”¹ï¼Œä¿®æ”¹åé‡å¯ç¨‹åº
+int g_studentNum = 0;   //å…¨å±€å˜é‡ï¼Œç”¨äºå­˜å‚¨å­¦ç”Ÿæ•°é‡
+USER *g_user = NULL;    //å…¨å±€å˜é‡ï¼Œç”¨äºå­˜å‚¨å½“å‰ç™»å½•ç”¨æˆ·çš„ä¿¡æ¯
 
 int main() {
     setTitle("V-SGMS 1.0");
     //setWindowSize(479, 390);
     system("color f9");
-    //welcomeInit();
-    STU *head = NULL;   //Ñ§ÉúĞÅÏ¢Á´±íÍ·Ö¸Õë
+
+    //welcomeInit();    //æ¬¢è¿ç•Œé¢
+    readBasicInfo();    //è¯»å–åŸºæœ¬ä¿¡æ¯
+    STU *head = NULL;   //å­¦ç”Ÿä¿¡æ¯é“¾è¡¨å¤´æŒ‡é’ˆ
     //USER *temp_user = (USER *) calloc(sizeof(USER), 1);
     //loginMod(temp_user, 6, 3);
-    int choice1, choice2;
+
+    int choice1, choice2;   //ç”¨äºå­˜å‚¨ç”¨æˆ·é€‰æ‹©çš„èœå•é€‰é¡¹
+    //ä¸»èœå•
     do {
         choice1 = menuController(mainMenu, 6);
         switch (choice1) {
             case 0:
-                printf("ÕâÊÇ¸öĞ¡²Êµ°£¬ÎûÎû£¡");
+                printf("è¿™æ˜¯ä¸ªå°å½©è›‹ï¼Œå˜»å˜»ï¼");
                 Sleep(500);
                 break;
-            case 1: //Ñ§Éú³É¼¨²éÑ¯
+            case 1: //å­¦ç”Ÿæˆç»©æŸ¥è¯¢
                 do {
                     choice2 = menuController(studentGradeQueryMenu1, 8);
                     head = doubleListReadFromFile();
                     switch (choice2) {
-                        case 1: //²éÑ¯Ã¿ÃÅ¿Î³ÌµÄ×Ü·ÖºÍÆ½¾ù·Ö
-                            printf("1");
+                        case 1: //æŸ¥è¯¢æ¯é—¨è¯¾ç¨‹çš„æ€»åˆ†å’Œå¹³å‡åˆ†
+                            queryTotalAndAverageScore(head);
                             break;
-                        case 2: //°´ÕÕÃ¿¸öÑ§ÉúµÄ×Ü·ÖÓÉ¸ßµ½µÍÅÅ³öÃû´Î±í
+                        case 2: //æŒ‰ç…§æ¯ä¸ªå­¦ç”Ÿçš„æ€»åˆ†ç”±é«˜åˆ°ä½æ’å‡ºåæ¬¡è¡¨
                             printf("2");
                             break;
-                        case 3: //°´ÕÕÃ¿¸öÑ§ÉúµÄ×Ü·ÖÓÉ¸ßµ½µÍÅÅ³öÃû´Î±í
+                        case 3: //æŒ‰ç…§æ¯ä¸ªå­¦ç”Ÿçš„æ€»åˆ†ç”±é«˜åˆ°ä½æ’å‡ºåæ¬¡è¡¨
                             printf("3");
                             break;
-                        case 4: //°´ÕÕÑ§ºÅÓÉĞ¡µ½´óÅÅ³ö³É¼¨±í
+                        case 4: //æŒ‰ç…§å­¦å·ç”±å°åˆ°å¤§æ’å‡ºæˆç»©è¡¨
                             printf("4");
                             break;
                         case 5:
@@ -50,26 +54,26 @@ int main() {
                         case 6:
                             printf("6");
                             break;
-                        case 7: //Êä³öÃ¿¸öÑ§ÉúÈ«²¿ĞÅÏ¢
+                        case 7: //è¾“å‡ºæ¯ä¸ªå­¦ç”Ÿå…¨éƒ¨ä¿¡æ¯
                             system("cls");
                             doubleListPrint(head);
                             break;
-                        case 8: //·µ»ØÉÏÒ»¼¶²Ëµ¥
+                        case 8: //è¿”å›ä¸Šä¸€çº§èœå•
                             break;
                         default:
-                            printf("Ã»ÓĞÕâ¸öÑ¡Ïî£¡");
+                            printf("æ²¡æœ‰è¿™ä¸ªé€‰é¡¹ï¼");
                             Sleep(300);
                             break;
                     }
-                    if (choice2 != 8) { //Èç¹û²»ÊÇ·µ»ØÉÏÒ»¼¶²Ëµ¥£¬¾ÍÔİÍ£
-                        printf("°´ÈÎÒâ¼ü¼ÌĞø¡£¡£¡£");
-                        getch();    //ÔİÍ£
+                    if (choice2 != 8) { //å¦‚æœä¸æ˜¯è¿”å›ä¸Šä¸€çº§èœå•ï¼Œå°±æš‚åœ
+                        printf("æŒ‰ä»»æ„é”®ç»§ç»­ã€‚ã€‚ã€‚");
+                        getch();    //æš‚åœ
                     }
                     choice1 = 0;
                     doubleListFree(head);
                 } while (choice2 < 1 || choice2 > 8);
                 break;
-            case 2: //Ñ§Éú³É¼¨¹ÜÀí
+            case 2: //å­¦ç”Ÿæˆç»©ç®¡ç†
                 do {
                     choice2 = menuController(studentGradeManageMenu1, 4);
                     head = doubleListReadFromFile();
@@ -88,7 +92,7 @@ int main() {
                             choice1 = 0;
                             break;
                         default:
-                            printf("Ã»ÓĞÕâ¸öÑ¡Ïî£¡");
+                            printf("æ²¡æœ‰è¿™ä¸ªé€‰é¡¹ï¼");
                             Sleep(300);
                             break;
                     }
@@ -96,17 +100,17 @@ int main() {
                     doubleListFree(head);
                 } while (choice2 < 1 || choice2 > 4);
                 break;
-            case 3: //ĞŞ¸ÄÃÜÂë
+            case 3: //ä¿®æ”¹å¯†ç 
                 printf("3");
                 break;
-            case 4: //ÍË³öµÇÂ¼
+            case 4: //é€€å‡ºç™»å½•
                 printf("4");
                 break;
-            case 5: //¹ØÓÚ
+            case 5: //å…³äº
                 About();
                 choice1 = 0;
                 break;
-            case 6: //ÍË³ö
+            case 6: //é€€å‡º
                 choice2 = menuController(exitConfirmMenu, 2);
                 if (choice2 == 1) {
                     exit(0);
@@ -115,7 +119,7 @@ int main() {
                 }
                 break;
             default:
-                printf("Ã»ÓĞÕâ¸öÑ¡Ïî£¡");
+                printf("æ²¡æœ‰è¿™ä¸ªé€‰é¡¹ï¼");
                 Sleep(300);
                 break;
         }
