@@ -92,3 +92,4 @@ void queryTotalAndAverageScore(STU *stu) {
 }
 
 //函数功能：按指定的标准对学生信息进行排序并输出
+
