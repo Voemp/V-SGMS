@@ -89,9 +89,9 @@ void doubleListFree(STU *head) {
 void doubleListPrint(STU *head) {
     STU *temp = head->next;
     while (temp != NULL) {
-        printf("%-16s%-10s", temp->studentID, temp->studentName);
+        printf("%-16s%s", temp->studentID, temp->studentName);
         for (int i = 0; i < g_subjectNum; ++i) {
-            printf("\t%.1f", temp->score[i].subjectScore);
+            printf("\t%d", temp->score[i].subjectName, temp->score[i].subjectScore);
         }
         printf("\n");
         temp = temp->next;

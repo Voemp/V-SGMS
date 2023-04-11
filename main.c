@@ -15,15 +15,11 @@ int main() {
     setTitle("V-SGMS 1.0");
     //setWindowSize(479, 390);
     system("color f9");
-
-    //welcomeInit();    //欢迎界面
-    readBasicInfo();    //读取基本信息
+    //welcomeInit();
     STU *head = NULL;   //学生信息链表头指针
     //USER *temp_user = (USER *) calloc(sizeof(USER), 1);
     //loginMod(temp_user, 6, 3);
-
-    int choice1, choice2;   //用于存储用户选择的菜单选项
-    //主菜单
+    int choice1, choice2;
     do {
         choice1 = menuController(mainMenu, 6);
         switch (choice1) {
@@ -37,7 +33,7 @@ int main() {
                     head = doubleListReadFromFile();
                     switch (choice2) {
                         case 1: //查询每门课程的总分和平均分
-                            queryTotalAndAverageScore(head);
+                            printf("1");
                             break;
                         case 2: //按照每个学生的总分由高到低排出名次表
                             printf("2");
