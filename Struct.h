@@ -3,24 +3,24 @@
 #define V_SGMS_STRUCT_H
 
 typedef struct user {
-    char account[20];   //ÕËºÅ
-    char password[20];  //ÃÜÂë
-    int role;   //Êı×Ö±íÊ¾½ÇÉ« 1ÊÇ teacher  2ÊÇstudent
+    char account[20];   //è´¦å·
+    char password[20];  //å¯†ç 
+    int role;   //æ•°å­—è¡¨ç¤ºè§’è‰² 1æ˜¯ teacher  2æ˜¯student
 } USER;
 
 typedef struct subject {
-    int subjectName;   //¿ÆÄ¿Ãû
-    int subjectScore;   //¿ÆÄ¿·ÖÊı
+    int subjectName;   //ç§‘ç›®å
+    float subjectScore;   //ç§‘ç›®åˆ†æ•°
 } SUB;
 
 typedef struct student {
-    struct student *pre;   //Ç°Ò»¸ö½Úµã
-    char studentID[20]; //Ñ§ºÅ
-    char studentName[20];   //ĞÕÃû
-    SUB score[6];   //³É¼¨
-    int totalScore; //×Ü·Ö
-    float averageScore; //Æ½¾ù·Ö
-    struct student *next;   //ºóÒ»¸ö½Úµã
+    struct student *pre;   //å‰ä¸€ä¸ªèŠ‚ç‚¹
+    char studentID[20]; //å­¦å·
+    char studentName[20];   //å§“å
+    SUB score[6];   //æˆç»©
+    float totalScore; //æ€»åˆ†
+    float averageScore; //å¹³å‡åˆ†
+    struct student *next;   //åä¸€ä¸ªèŠ‚ç‚¹
 } STU;
 
 #endif //V_SGMS_STRUCT_H
