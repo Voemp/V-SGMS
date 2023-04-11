@@ -10,7 +10,7 @@ typedef struct user {
 
 typedef struct subject {
     int subjectName;   //科目名
-    int subjectScore;   //科目分数
+    float subjectScore;   //科目分数
 } SUB;
 
 typedef struct student {
@@ -18,7 +18,7 @@ typedef struct student {
     char studentID[20]; //学号
     char studentName[20];   //姓名
     SUB score[6];   //成绩
-    int totalScore; //总分
+    float totalScore; //总分
     float averageScore; //平均分
     struct student *next;   //后一个节点
 } STU;
