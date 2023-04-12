@@ -16,9 +16,9 @@ STU *doubleListCreate() {
 
 //函数功能：学生信息链表添加（尾插法）
 void doubleListAdd(STU *head, STU *stu) {
-    STU *end = head->pre;   //end指向链表尾节点
-    end->next = stu;    //尾节点的next指向新节点
-    stu->pre = end;    //新节点的pre指向尾节点
+    STU *tail = head->pre;   //end指向链表尾节点
+    tail->next = stu;    //尾节点的next指向新节点
+    stu->pre = tail;    //新节点的pre指向尾节点
     stu->next = NULL;   //新节点的next指向NULL
     head->pre = stu;    //头节点的pre指向新节点
 }
@@ -65,6 +65,7 @@ STU *doubleListReadFromFile() {
         STU *stu = (STU *) calloc(sizeof(STU), 1);
         if (stu == NULL) {
             printf("内存分配失败！");
+            Sleep(1000);
             exit(0);
         }
         fread(stu, sizeof(STU), 1, fp);
@@ -98,4 +99,4 @@ void doubleListPrint(STU *head) {
     }
 }
 
-//函数功能：学生信息链表排序
+//函数功能：学生信息链表快速排序

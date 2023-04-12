@@ -69,7 +69,7 @@ int main() {
                         printf("按任意键继续。。。");
                         getch();    //暂停
                     }
-                    choice1 = 0;
+                    choice1 = 0;    //返回上一级菜单
                     doubleListFree(head);
                 } while (choice2 < 1 || choice2 > 8);
                 break;
