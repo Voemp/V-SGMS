@@ -1,86 +1,93 @@
 // Created by VoidEmpty on 2023/4/3.
 #include "GradeManagement.h"
 
-//ÂáΩÊï∞ÂäüËÉΩÔºö‰ªéÊñá‰ª∂ËØªÂèñÁ®ãÂ∫èÂü∫Êú¨‰ø°ÊÅØ
+//∫Ø ˝π¶ƒ‹£∫¥”Œƒº˛∂¡»°≥Ã–Úª˘±æ–≈œ¢
 void readBasicInfo() {
+    FILE *tfp = fopen("BasicInfo.txt", "a");
+    fclose(tfp);
     FILE *fp = fopen("BasicInfo.txt", "r");
     if (fp == NULL) {
-        printf("Êñá‰ª∂ÊâìÂºÄÂ§±Ë¥•ÔºÅ");
+        printf("Œƒº˛¥Úø™ ß∞‹£°");
         exit(0);
     }
     fscanf(fp, "%d", &g_studentNum);
+    fclose(fp);
 }
 
-//ÂáΩÊï∞ÂäüËÉΩÔºöÂΩïÂÖ•ÊàêÁª©
+//∫Ø ˝π¶ƒ‹£∫¬º»Î≥…º®
 void readScore(STU *stu) {
-    stu->totalScore = 0;    //ÂàùÂßãÂåñÊÄªÂàÜ
-    printf("ËØ∑ËæìÂÖ•Â≠¶Âè∑Ôºö");
+    stu->totalScore = 0;    //≥ı ºªØ◊‹∑÷
+    printf("«Î ‰»Î—ß∫≈£∫");
     scanf("%s", stu->studentID);
-    printf("ËØ∑ËæìÂÖ•ÂßìÂêçÔºö");
+    printf("«Î ‰»Î–’√˚£∫");
     scanf("%s", stu->studentName);
     for (int i = 0; i < g_subjectNum; ++i) {
         stu->score[i].subjectName = i + 1;
-        printf("ËØ∑ËæìÂÖ•Á¨¨%dÈó®ÁöÑÊàêÁª©Ôºö", stu->score[i].subjectName);
+        printf("«Î ‰»Îµ⁄%d√≈µƒ≥…º®£∫", stu->score[i].subjectName);
         scanf("%f", &stu->score[i].subjectScore);
-        stu->totalScore += stu->score[i].subjectScore;  //ËÆ°ÁÆóÊÄªÂàÜ
+        stu->totalScore += stu->score[i].subjectScore;  //º∆À„◊‹∑÷
     }
-    stu->averageScore = stu->totalScore / g_subjectNum;   //ËÆ°ÁÆóÂπ≥ÂùáÂàÜ
+    stu->averageScore = stu->totalScore / g_subjectNum;   //º∆À„∆Ωæ˘∑÷
 }
 
-//ÂáΩÊï∞ÂäüËÉΩÔºöÊó†ÈôêÊ¨°ÂΩïÂÖ•ÊàêÁª©
+//∫Ø ˝π¶ƒ‹£∫Œﬁœﬁ¥Œ¬º»Î≥…º®
 void readScoreInfinite(STU *head) {
     int choice;
     do {
         system("cls");
         printf("************************\n");
-        printf("*   Â≠¶ÁîüÊàêÁª©ÂΩïÂÖ•Á≥ªÁªü   *\n");
+        printf("*   —ß…˙≥…º®¬º»ÎœµÕ≥   *\n");
         printf("************************\n");
         STU *stu = (STU *) calloc(sizeof(STU), 1);
         if (stu == NULL) {
-            printf("ÂÜÖÂ≠òÂàÜÈÖçÂ§±Ë¥•ÔºÅ");
+            printf("ƒ⁄¥Ê∑÷≈‰ ß∞‹£°");
             exit(0);
         }
         readScore(stu);
-        doubleListInsert(head, stu);
+        doubleListAdd(head, stu);   //Œ≤≤Â∑®
         g_studentNum++;
+        printf("¬º»Î≥…π¶£°µ±«∞—ß…˙»À ˝£∫%d\n", g_studentNum);
+        printf(" «∑ÒºÃ–¯¬º»Î£ø\n");
+        IN_CYAN;
+        printf("1. «\t2.∑Ò\n");
+        IN_WHITE;
         do {
-            printf("ÊòØÂê¶ÁªßÁª≠ÂΩïÂÖ•Ôºü\n");
-            IN_CYAN;
-            printf("1.ÊòØ\t2.Âê¶\n");
-            IN_WHITE;
             choice = getch();
             if (choice != '1' && choice != '2') {
-                printf("ËæìÂÖ•ÈîôËØØÔºåËØ∑ÈáçÊñ∞ËæìÂÖ•ÔºÅ\n");
-                Sleep(300);
+                printf(" ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬ ‰»Î£°\r");
+                Sleep(500);
+                printf("                    \r");   //«Â≥˝ ‰»Î¥ÌŒÛÃ· æ
             }
-        } while (choice != '1' && choice != '2');
-    } while (choice == '1');
-    printf("ÂΩïÂÖ•ÂÆåÊàêÔºÅÂç≥Â∞ÜËøîÂõûËèúÂçï„ÄÇ„ÄÇ„ÄÇ\n");
+        } while (choice != '1' && choice != '2');   // ‰»Î¥ÌŒÛ‘Ú÷ÿ–¬ ‰»Î
+    } while (choice == '1');    // ‰»Î1‘ÚºÃ–¯¬º»Î
+    printf("¬º»ÎÕÍ≥…£°º¥Ω´∑µªÿ≤Àµ•°£°£°£\n");
     FILE *fp = fopen("BasicInfo.txt", "w");
     if (fp == NULL) {
-        printf("Êñá‰ª∂ÊâìÂºÄÂ§±Ë¥•ÔºÅ");
+        printf("Œƒº˛¥Úø™ ß∞‹£°");
         exit(0);
     }
     fprintf(fp, "%d", g_studentNum);
+    fclose(fp);
+
     Sleep(500);
 }
 
 
-//ÂáΩÊï∞ÂäüËÉΩÔºöÊü•ËØ¢ÊØèÈó®ËØæÁ®ãÁöÑÊÄªÂàÜÂíåÂπ≥ÂùáÂàÜ
+//∫Ø ˝π¶ƒ‹£∫≤È—Ø√ø√≈øŒ≥Ãµƒ◊‹∑÷∫Õ∆Ωæ˘∑÷
 void queryTotalAndAverageScore(STU *stu) {
     system("cls");
     printf("*******************************\n");
-    printf("*   ÊØèÈó®ËØæÁ®ãÁöÑÊÄªÂàÜÂíåÂπ≥ÂùáÂàÜ    *\n");
-    printf(" ‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî\n");
-    printf("|  ËØæÁ®ãÂêçÁß∞ |  ÊÄªÂàÜ  | Âπ≥ÂùáÂàÜ |\n");
-    printf(" ‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî\n");
+    printf("*   √ø√≈øŒ≥Ãµƒ◊‹∑÷∫Õ∆Ωæ˘∑÷    *\n");
+    printf(" -----------------------------\n");
+    printf("|  øŒ≥Ã√˚≥∆ |  ◊‹∑÷  | ∆Ωæ˘∑÷ |\n");
+    printf(" -----------------------------\n");
     float *total_score = calloc(sizeof(float), g_subjectNum);
     if (total_score == NULL) {
-        printf("ÂÜÖÂ≠òÂàÜÈÖçÂ§±Ë¥•ÔºÅ");
+        printf("ƒ⁄¥Ê∑÷≈‰ ß∞‹£°");
         exit(0);
     }
-    STU *temp = stu->next;  //Â§¥ÁªìÁÇπ‰∏çÂèÇ‰∏éËÆ°ÁÆó
-    //ËÆ°ÁÆóÊÄªÂàÜ
+    STU *temp = stu->next;  //Õ∑Ω·µ„≤ª≤Œ”Îº∆À„
+    //º∆À„◊‹∑÷
     while (temp != NULL) {
         for (int i = 0; i < g_subjectNum; ++i) {
             total_score[i] += temp->score[i].subjectScore;
@@ -88,11 +95,27 @@ void queryTotalAndAverageScore(STU *stu) {
         temp = temp->next;
     }
     for (int i = 0; i < g_subjectNum; ++i) {
-        printf("| Á¨¨%dÈó®ËØæÁ®ã | %6.1f | %6.1f |\n", i + 1, total_score[i], total_score[i] / g_studentNum);
-        printf(" ‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî‚Äî\n");
+        printf("| µ⁄%d√≈øŒ≥Ã | %6.1f | %6.1f |\n", i + 1, total_score[i], total_score[i] / g_studentNum);
+        printf(" -----------------------------\n");
     }
     free(total_score);
 }
 
-//ÂáΩÊï∞ÂäüËÉΩÔºöÊåâÊåáÂÆöÁöÑÊ†áÂáÜÂØπÂ≠¶Áîü‰ø°ÊÅØËøõË°åÊéíÂ∫èÂπ∂ËæìÂá∫
-
+//∫Ø ˝π¶ƒ‹£∫∞¥’’√ø∏ˆ—ß…˙µƒ◊‹∑÷”…∏ﬂµΩµÕ≈≈≥ˆ√˚¥Œ±Ì
+void queryRankAscending(STU *stu) {
+    system("cls");
+    printf("***********************************\n");
+    printf("* ∞¥—ß…˙µƒ◊‹∑÷”…∏ﬂµΩµÕ≈≈≥ˆ√˚¥Œ±Ì  *\n");
+    printf(" ---------------------------------\n");
+    printf("|  —ß∫≈  |  –’√˚  |  ◊‹∑÷  | ≈≈√˚ |\n");
+    printf(" ---------------------------------\n");
+    doubleListInsertSort(stu, 1);  //∞¥’’◊‹∑÷”…∏ﬂµΩµÕ≈≈–Ú
+    STU *temp = stu->next;  //Õ∑Ω·µ„≤ª≤Œ”Îº∆À„
+    int rank = 1;
+    while (temp != NULL) {
+        printf("| %6s | %6s | %6.1f | %4d |\n", temp->studentID, temp->studentName, temp->totalScore, rank);
+        printf(" ---------------------------------\n");
+        temp = temp->next;
+        rank++;
+    }
+}

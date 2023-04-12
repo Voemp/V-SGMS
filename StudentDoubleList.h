@@ -17,8 +17,11 @@ STU *doubleListCreate();
 //函数功能：弹出节点
 void Remove(STU *new);
 
-//函数功能：学生信息链表插入（尾插法）
-void doubleListInsert(STU *head, STU *stu);
+//函数功能：学生信息链表添加（尾插法）
+void doubleListAdd(STU *head, STU *stu);
+
+//函数功能：学生信息链表插入
+void doubleListInsert(STU *head, STU *new);
 
 //函数功能：学生信息链表写入文件
 void doubleListWriteToFile(STU *head);

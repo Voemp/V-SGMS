@@ -2,11 +2,11 @@
 
 #include "StudentDoubleList.h"
 
-//å‡½æ•°åŠŸèƒ½ï¼šå­¦ç”Ÿä¿¡æ¯é“¾è¡¨åˆå§‹åŒ–
+//º¯Êı¹¦ÄÜ£ºÑ§ÉúĞÅÏ¢Á´±í³õÊ¼»¯
 STU *doubleListCreate() {
     STU *head = (STU *) calloc(sizeof(STU), 1);
     if (head == NULL) {
-        printf("å†…å­˜åˆ†é…å¤±è´¥ï¼");
+        printf("ÄÚ´æ·ÖÅäÊ§°Ü£¡");
         exit(0);
     }
     head->pre = head;
@@ -14,27 +14,35 @@ STU *doubleListCreate() {
     return head;
 }
 
-//å‡½æ•°åŠŸèƒ½ï¼šå¼¹å‡ºèŠ‚ç‚¹
+//º¯Êı¹¦ÄÜ£ºµ¯³ö½Úµã
 void Remove(STU *new) {
-    new->pre->next = new->next; //å‰é©±çš„åç»§æŒ‡å‘åç»§
-    new->next->pre = new->pre;  //åç»§çš„å‰é©±æŒ‡å‘å‰é©±
-    new->next = new;    //åç»§æŒ‡å‘è‡ªå·±
-    new->pre = new;    //å‰é©±æŒ‡å‘è‡ªå·±
+    new->pre->next = new->next; //Ç°ÇıµÄºó¼ÌÖ¸Ïòºó¼Ì
+    new->next->pre = new->pre;  //ºó¼ÌµÄÇ°ÇıÖ¸ÏòÇ°Çı
+    new->next = new;    //ºó¼ÌÖ¸Ïò×Ô¼º
+    new->pre = new;    //Ç°ÇıÖ¸Ïò×Ô¼º
 }
 
-//å‡½æ•°åŠŸèƒ½ï¼šå­¦ç”Ÿä¿¡æ¯é“¾è¡¨æ’å…¥ï¼ˆå°¾æ’æ³•ï¼‰
+//º¯Êı¹¦ÄÜ£ºÑ§ÉúĞÅÏ¢Á´±íÌí¼Ó£¨Î²²å·¨£©
+void doubleListAdd(STU *head, STU *new) {
+    new->pre = head->pre;   //ĞÂ½ÚµãµÄÇ°ÇıÖ¸ÏòÔ­Á´±íµÄÎ²½Úµã
+    head->pre->next = new;  //Ô­Á´±íµÄÎ²½ÚµãµÄºó¼ÌÖ¸ÏòĞÂ½Úµã
+    new->next = NULL;    //ĞÂ½ÚµãµÄºó¼ÌÖ¸ÏòNULL
+    head->pre = new;    //Í·½ÚµãµÄÇ°ÇıÖ¸ÏòĞÂ½Úµã
+}
+
+//º¯Êı¹¦ÄÜ£ºÑ§ÉúĞÅÏ¢Á´±í²åÈë
 void doubleListInsert(STU *head, STU *new) {
-    new->pre = head->pre;   //æ–°èŠ‚ç‚¹çš„å‰é©±æŒ‡å‘åŸé“¾è¡¨çš„å°¾èŠ‚ç‚¹
-    head->pre->next = new;  //åŸé“¾è¡¨çš„å°¾èŠ‚ç‚¹çš„åç»§æŒ‡å‘æ–°èŠ‚ç‚¹
-    new->next = head;    //æ–°èŠ‚ç‚¹çš„åç»§æŒ‡å‘å¤´èŠ‚ç‚¹
-    head->pre = new;    //å¤´èŠ‚ç‚¹çš„å‰é©±æŒ‡å‘æ–°èŠ‚ç‚¹
+    new->pre = head->pre;   //ĞÂ½ÚµãµÄÇ°ÇıÖ¸ÏòÔ­Á´±íµÄÎ²½Úµã
+    head->pre->next = new;  //Ô­Á´±íµÄÎ²½ÚµãµÄºó¼ÌÖ¸ÏòĞÂ½Úµã
+    new->next = head;    //ĞÂ½ÚµãµÄºó¼ÌÖ¸ÏòÍ·½Úµã
+    head->pre = new;    //Í·½ÚµãµÄÇ°ÇıÖ¸ÏòĞÂ½Úµã
 }
 
-//å‡½æ•°åŠŸèƒ½ï¼šå­¦ç”Ÿä¿¡æ¯é“¾è¡¨å†™å…¥æ–‡ä»¶
+//º¯Êı¹¦ÄÜ£ºÑ§ÉúĞÅÏ¢Á´±íĞ´ÈëÎÄ¼ş
 void doubleListWriteToFile(STU *head) {
     FILE *fp = fopen("StudentInfo.txt", "wb");
     if (fp == NULL) {
-        printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥ï¼");
+        printf("ÎÄ¼ş´ò¿ªÊ§°Ü£¡");
         exit(0);
     }
     STU *temp = head->next;
@@ -45,33 +53,35 @@ void doubleListWriteToFile(STU *head) {
     fclose(fp);
 }
 
-//å‡½æ•°åŠŸèƒ½ï¼šå­¦ç”Ÿä¿¡æ¯é“¾è¡¨è¯»å–æ–‡ä»¶
+//º¯Êı¹¦ÄÜ£ºÑ§ÉúĞÅÏ¢Á´±í¶ÁÈ¡ÎÄ¼ş
 STU *doubleListReadFromFile() {
+    FILE *tfp = fopen("StudentInfo.txt", "ab");
+    fclose(tfp);
     FILE *fp = fopen("StudentInfo.txt", "rb");
     if (fp == NULL) {
-        printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥ï¼");
+        printf("ÎÄ¼ş´ò¿ªÊ§°Ü£¡");
         exit(0);
     }
     STU *head = doubleListCreate();
     while (!feof(fp)) {
-        fgetc(fp);    //å…ˆè¯»ä¸€æ¬¡ï¼Œä¸‹é¢å†åˆ¤æ–­æ˜¯å¦æ–‡ä»¶ç»“æŸï¼Œç»“æŸåˆ™è·³å‡ºå¾ªç¯
+        fgetc(fp);    //ÏÈ¶ÁÒ»´Î£¬ÏÂÃæÔÙÅĞ¶ÏÊÇ·ñÎÄ¼ş½áÊø£¬½áÊøÔòÌø³öÑ­»·
         if (feof(fp))
             break;
-        fseek(fp, -1, 1);       //å¦‚æœaè¿™ä¸ªå€¼ä¸ä½¿ç”¨ï¼Œè®°å¾—å‰ç§»æ–‡ä»¶æŒ‡é’ˆ
+        fseek(fp, -1, 1);       //Èç¹ûaÕâ¸öÖµ²»Ê¹ÓÃ£¬¼ÇµÃÇ°ÒÆÎÄ¼şÖ¸Õë
         STU *stu = (STU *) calloc(sizeof(STU), 1);
         if (stu == NULL) {
-            printf("å†…å­˜åˆ†é…å¤±è´¥ï¼");
+            printf("ÄÚ´æ·ÖÅäÊ§°Ü£¡");
             Sleep(1000);
             exit(0);
         }
         fread(stu, sizeof(STU), 1, fp);
-        doubleListInsert(head, stu);
+        doubleListAdd(head, stu);   //Î²²å·¨
     }
     fclose(fp);
     return head;
 }
 
-//å‡½æ•°åŠŸèƒ½ï¼šé“¾è¡¨é‡Šæ”¾
+//º¯Êı¹¦ÄÜ£ºÁ´±íÊÍ·Å
 void doubleListFree(STU *head) {
     STU *temp = head->next;
     while (temp != NULL) {
@@ -82,7 +92,7 @@ void doubleListFree(STU *head) {
     free(head);
 }
 
-//å‡½æ•°åŠŸèƒ½ï¼šå­¦ç”Ÿä¿¡æ¯é“¾è¡¨æ‰“å°
+//º¯Êı¹¦ÄÜ£ºÑ§ÉúĞÅÏ¢Á´±í´òÓ¡
 void doubleListPrint(STU *head) {
     STU *temp = head->next;
     while (temp != NULL) {
@@ -95,43 +105,44 @@ void doubleListPrint(STU *head) {
     }
 }
 
-/*å‡½æ•°åŠŸèƒ½ï¼šå­¦ç”Ÿä¿¡æ¯é“¾è¡¨æ’å…¥æ’åº
- * headï¼šå­¦ç”Ÿä¿¡æ¯é“¾è¡¨å¤´æŒ‡é’ˆ
- * valueï¼šæ’åºä¾æ®ï¼Œ1ï¼šæ€»åˆ†ï¼Œ2ï¼šå­¦å·ï¼Œ3ï¼šå§“å
+/*º¯Êı¹¦ÄÜ£ºÑ§ÉúĞÅÏ¢Á´±í²åÈëÅÅĞò
+ * head£ºÑ§ÉúĞÅÏ¢Á´±íÍ·Ö¸Õë
+ * value£ºÅÅĞòÒÀ¾İ£¬1£º×Ü·Ö£¬2£ºÑ§ºÅ£¬3£ºĞÕÃû
  */
 void doubleListInsertSort(STU *head, int value) {
-    //å¤´ç»“ç‚¹æ˜¯ç©ºçš„æˆ–è€…è¡¨æ˜¯ç©ºçš„æˆ–è€…è¡¨åªæœ‰ä¸€ä¸ªèŠ‚ç‚¹æ—¶å€™ä¸ç”¨æ’
+    //Í·½áµãÊÇ¿ÕµÄ»òÕß±íÊÇ¿ÕµÄ»òÕß±íÖ»ÓĞÒ»¸ö½ÚµãÊ±ºò²»ÓÃÅÅ
     if (!head || head->next == NULL || head->next->next == NULL) {
         return;
     }
     STU *p, *q, *tail;
-    //head->next->nextå¼€å§‹éå†ï¼ŒtailåŠtailå‰é¢çš„æ˜¯æ’å¥½åºçš„ï¼Œpæ˜¯æœ¬è½®å¾…æ’å…¥å€¼ï¼Œç­‰äºheadæ—¶ç»“æŸ
+    //head->next->next¿ªÊ¼±éÀú£¬tail¼°tailÇ°ÃæµÄÊÇÅÅºÃĞòµÄ£¬pÊÇ±¾ÂÖ´ı²åÈëÖµ£¬µÈÓÚheadÊ±½áÊø
     for (tail = head->next, p = tail->next; p != head; p = tail->next) {
-        //ä»head->nextå¼€å§‹éå†ï¼Œç›´åˆ°tailç»“æŸ
+        //´Óhead->next¿ªÊ¼±éÀú£¬Ö±µ½tail½áÊø
         for (q = head; q != tail; q = q->next) {
-            if (value == 1) {  //æŒ‰æ€»åˆ†æ’åº
-                //å¦‚æœpçš„æ€»åˆ†å°äºqçš„æ€»åˆ†ï¼Œå°±æŠŠpæ’å…¥åˆ°qçš„å‰é¢
+            if (value == 1) {  //°´×Ü·ÖÅÅĞò
+                //Èç¹ûpµÄ×Ü·ÖĞ¡ÓÚqµÄ×Ü·Ö£¬¾Í°Ñp²åÈëµ½qµÄÇ°Ãæ
                 if (p->totalScore < q->next->totalScore) {
-                    Remove(p);  //ä»åŸä½ç½®åˆ é™¤pèŠ‚ç‚¹
-                    doubleListInsert(q, p); //æŠŠpèŠ‚ç‚¹æ’å…¥åˆ°q->nextå‰é¢,å³qçš„åé¢
+                    Remove(p);  //´ÓÔ­Î»ÖÃÉ¾³ıp½Úµã
+                    doubleListInsert(q, p); //°Ñp½Úµã²åÈëµ½q->nextÇ°Ãæ,¼´qµÄºóÃæ
                     break;
                 }
-            } else if (value == 2) {    //æŒ‰å­¦å·æ’åº
-                //å¦‚æœpçš„å­¦å·å°äºqçš„å­¦å·ï¼Œå°±æŠŠpæ’å…¥åˆ°qçš„å‰é¢
+            } else if (value == 2) {    //°´Ñ§ºÅÅÅĞò
+                //Èç¹ûpµÄÑ§ºÅĞ¡ÓÚqµÄÑ§ºÅ£¬¾Í°Ñp²åÈëµ½qµÄÇ°Ãæ
                 if (strcmp(p->studentID, q->next->studentID) < 0) {
-                    Remove(p);  //ä»åŸä½ç½®åˆ é™¤pèŠ‚ç‚¹
-                    doubleListInsert(q, p); //æŠŠpèŠ‚ç‚¹æ’å…¥åˆ°q->nextå‰é¢,å³qçš„åé¢
+                    Remove(p);  //´ÓÔ­Î»ÖÃÉ¾³ıp½Úµã
+                    doubleListInsert(q, p); //°Ñp½Úµã²åÈëµ½q->nextÇ°Ãæ,¼´qµÄºóÃæ
                     break;
                 }
-            } else if (value == 3) {   //æŒ‰å§“åæ’åº
-                //å¦‚æœpçš„å§“åå°äºqçš„å§“åï¼Œå°±æŠŠpæ’å…¥åˆ°qçš„å‰é¢
+            } else if (value == 3) {   //°´ĞÕÃûÅÅĞò
+                //Èç¹ûpµÄĞÕÃûĞ¡ÓÚqµÄĞÕÃû£¬¾Í°Ñp²åÈëµ½qµÄÇ°Ãæ
                 if (strcmp(p->studentName, q->next->studentName) < 0) {
-                    Remove(p);  //ä»åŸä½ç½®åˆ é™¤pèŠ‚ç‚¹
-                    doubleListInsert(q, p); //æŠŠpèŠ‚ç‚¹æ’å…¥åˆ°q->nextå‰é¢,å³qçš„åé¢
+                    Remove(p);  //´ÓÔ­Î»ÖÃÉ¾³ıp½Úµã
+                    doubleListInsert(q, p); //°Ñp½Úµã²åÈëµ½q->nextÇ°Ãæ,¼´qµÄºóÃæ
                     break;
                 }
             }
+            //if
         }
-        tail = tail->next;  //ä¸‹ç§»tail
+        tail = tail->next;  //ÏÂÒÆtail
     }
 }

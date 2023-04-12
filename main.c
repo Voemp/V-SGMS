@@ -7,45 +7,45 @@
 #include "GradeManagement.h"
 #include "StudentDoubleList.h"
 
-int g_subjectNum = 6;   //å…¨å±€å˜é‡ï¼Œç”¨äºå­˜å‚¨ç§‘ç›®æ•°é‡//å¯ä»¥å­˜åœ¨æ–‡ä»¶ä¸­ï¼Œè€å¸ˆå¯ä»¥ä¿®æ”¹ï¼Œä¿®æ”¹åé‡å¯ç¨‹åº
-int g_studentNum = 0;   //å…¨å±€å˜é‡ï¼Œç”¨äºå­˜å‚¨å­¦ç”Ÿæ•°é‡
-USER *g_user = NULL;    //å…¨å±€å˜é‡ï¼Œç”¨äºå­˜å‚¨å½“å‰ç™»å½•ç”¨æˆ·çš„ä¿¡æ¯
+int g_subjectNum = 6;   //È«¾Ö±äÁ¿£¬ÓÃÓÚ´æ´¢¿ÆÄ¿ÊıÁ¿//¿ÉÒÔ´æÔÚÎÄ¼şÖĞ£¬ÀÏÊ¦¿ÉÒÔĞŞ¸Ä£¬ĞŞ¸ÄºóÖØÆô³ÌĞò
+int g_studentNum = 0;   //È«¾Ö±äÁ¿£¬ÓÃÓÚ´æ´¢Ñ§ÉúÊıÁ¿
+USER *g_user = NULL;    //È«¾Ö±äÁ¿£¬ÓÃÓÚ´æ´¢µ±Ç°µÇÂ¼ÓÃ»§µÄĞÅÏ¢
 
 int main() {
     setTitle("V-SGMS 1.0");
     //setWindowSize(479, 390);
     system("color f9");
 
-    //welcomeInit();    //æ¬¢è¿ç•Œé¢
-    readBasicInfo();    //è¯»å–åŸºæœ¬ä¿¡æ¯
-    STU *head = NULL;   //å­¦ç”Ÿä¿¡æ¯é“¾è¡¨å¤´æŒ‡é’ˆ
+    //welcomeInit();    //»¶Ó­½çÃæ
+    readBasicInfo();    //¶ÁÈ¡»ù±¾ĞÅÏ¢
+    STU *head = NULL;   //Ñ§ÉúĞÅÏ¢Á´±íÍ·Ö¸Õë
     //USER *temp_user = (USER *) calloc(sizeof(USER), 1);
     //loginMod(temp_user, 6, 3);
 
-    int choice1, choice2;   //ç”¨äºå­˜å‚¨ç”¨æˆ·é€‰æ‹©çš„èœå•é€‰é¡¹
-    //ä¸»èœå•
+    int choice1 = 0, choice2 = 0;   //ÓÃÓÚ´æ´¢ÓÃ»§Ñ¡ÔñµÄ²Ëµ¥Ñ¡Ïî
+    //Ö÷²Ëµ¥
     do {
         choice1 = menuController(mainMenu, 6);
         switch (choice1) {
             case 0:
-                printf("è¿™æ˜¯ä¸ªå°å½©è›‹ï¼Œå˜»å˜»ï¼");
+                printf("ÕâÊÇ¸öĞ¡²Êµ°£¬ÎûÎû£¡");
                 Sleep(500);
                 break;
-            case 1: //å­¦ç”Ÿæˆç»©æŸ¥è¯¢
+            case 1: //Ñ§Éú³É¼¨²éÑ¯
                 do {
                     choice2 = menuController(studentGradeQueryMenu1, 8);
                     head = doubleListReadFromFile();
                     switch (choice2) {
-                        case 1: //æŸ¥è¯¢æ¯é—¨è¯¾ç¨‹çš„æ€»åˆ†å’Œå¹³å‡åˆ†
+                        case 1: //²éÑ¯Ã¿ÃÅ¿Î³ÌµÄ×Ü·ÖºÍÆ½¾ù·Ö
                             queryTotalAndAverageScore(head);
                             break;
-                        case 2: //æŒ‰ç…§æ¯ä¸ªå­¦ç”Ÿçš„æ€»åˆ†ç”±é«˜åˆ°ä½æ’å‡ºåæ¬¡è¡¨
-                            printf("2");
+                        case 2: //°´ÕÕÃ¿¸öÑ§ÉúµÄ×Ü·ÖÓÉ¸ßµ½µÍÅÅ³öÃû´Î±í
+                            queryRankAscending(head);
                             break;
-                        case 3: //æŒ‰ç…§æ¯ä¸ªå­¦ç”Ÿçš„æ€»åˆ†ç”±é«˜åˆ°ä½æ’å‡ºåæ¬¡è¡¨
+                        case 3: //°´ÕÕÃ¿¸öÑ§ÉúµÄ×Ü·ÖÓÉ¸ßµ½µÍÅÅ³öÃû´Î±í
                             printf("3");
                             break;
-                        case 4: //æŒ‰ç…§å­¦å·ç”±å°åˆ°å¤§æ’å‡ºæˆç»©è¡¨
+                        case 4: //°´ÕÕÑ§ºÅÓÉĞ¡µ½´óÅÅ³ö³É¼¨±í
                             printf("4");
                             break;
                         case 5:
@@ -54,33 +54,33 @@ int main() {
                         case 6:
                             printf("6");
                             break;
-                        case 7: //è¾“å‡ºæ¯ä¸ªå­¦ç”Ÿå…¨éƒ¨ä¿¡æ¯
+                        case 7: //Êä³öÃ¿¸öÑ§ÉúÈ«²¿ĞÅÏ¢
                             system("cls");
                             doubleListPrint(head);
                             break;
-                        case 8: //è¿”å›ä¸Šä¸€çº§èœå•
+                        case 8: //·µ»ØÉÏÒ»¼¶²Ëµ¥
                             break;
                         default:
-                            printf("æ²¡æœ‰è¿™ä¸ªé€‰é¡¹ï¼");
+                            printf("Ã»ÓĞÕâ¸öÑ¡Ïî£¡");
                             Sleep(300);
                             break;
                     }
-                    if (choice2 != 8) { //å¦‚æœä¸æ˜¯è¿”å›ä¸Šä¸€çº§èœå•ï¼Œå°±æš‚åœ
-                        printf("æŒ‰ä»»æ„é”®ç»§ç»­ã€‚ã€‚ã€‚");
-                        getch();    //æš‚åœ
+                    if (choice2 != 8) { //Èç¹û²»ÊÇ·µ»ØÉÏÒ»¼¶²Ëµ¥£¬¾ÍÔİÍ£
+                        printf("°´ÈÎÒâ¼ü¼ÌĞø¡£¡£¡£");
+                        getch();    //ÔİÍ£
                     }
-                    choice1 = 0;    //è¿”å›ä¸Šä¸€çº§èœå•
+                    choice1 = 0;    //·µ»ØÉÏÒ»¼¶²Ëµ¥
                     doubleListFree(head);
                 } while (choice2 < 1 || choice2 > 8);
                 break;
-            case 2: //å­¦ç”Ÿæˆç»©ç®¡ç†
+            case 2: //Ñ§Éú³É¼¨¹ÜÀí
                 do {
                     choice2 = menuController(studentGradeManageMenu1, 4);
                     head = doubleListReadFromFile();
                     switch (choice2) {
                         case 1:
                             readScoreInfinite(head);
-                            choice2 = 0;
+                            choice2 = -1;
                             break;
                         case 2:
                             printf("2");
@@ -92,7 +92,7 @@ int main() {
                             choice1 = 0;
                             break;
                         default:
-                            printf("æ²¡æœ‰è¿™ä¸ªé€‰é¡¹ï¼");
+                            printf("Ã»ÓĞÕâ¸öÑ¡Ïî£¡");
                             Sleep(300);
                             break;
                     }
@@ -100,17 +100,17 @@ int main() {
                     doubleListFree(head);
                 } while (choice2 < 1 || choice2 > 4);
                 break;
-            case 3: //ä¿®æ”¹å¯†ç 
+            case 3: //ĞŞ¸ÄÃÜÂë
                 printf("3");
                 break;
-            case 4: //é€€å‡ºç™»å½•
+            case 4: //ÍË³öµÇÂ¼
                 printf("4");
                 break;
-            case 5: //å…³äº
+            case 5: //¹ØÓÚ
                 About();
                 choice1 = 0;
                 break;
-            case 6: //é€€å‡º
+            case 6: //ÍË³ö
                 choice2 = menuController(exitConfirmMenu, 2);
                 if (choice2 == 1) {
                     exit(0);
@@ -119,7 +119,7 @@ int main() {
                 }
                 break;
             default:
-                printf("æ²¡æœ‰è¿™ä¸ªé€‰é¡¹ï¼");
+                printf("Ã»ÓĞÕâ¸öÑ¡Ïî£¡");
                 Sleep(300);
                 break;
         }
