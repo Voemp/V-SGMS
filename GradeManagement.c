@@ -13,6 +13,7 @@ void readBasicInfo() {
 
 //函数功能：录入成绩
 void readScore(STU *stu) {
+    stu->totalScore = 0;    //初始化总分
     printf("请输入学号：");
     scanf("%s", stu->studentID);
     printf("请输入姓名：");
@@ -21,7 +22,9 @@ void readScore(STU *stu) {
         stu->score[i].subjectName = i + 1;
         printf("请输入第%d门的成绩：", stu->score[i].subjectName);
         scanf("%f", &stu->score[i].subjectScore);
+        stu->totalScore += stu->score[i].subjectScore;  //计算总分
     }
+    stu->averageScore = stu->totalScore / g_subjectNum;   //计算平均分
 }
 
 //函数功能：无限次录入成绩
@@ -38,7 +41,7 @@ void readScoreInfinite(STU *head) {
             exit(0);
         }
         readScore(stu);
-        doubleListAdd(head, stu);
+        doubleListInsert(head, stu);
         g_studentNum++;
         do {
             printf("是否继续录入？\n");
