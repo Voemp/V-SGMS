@@ -25,7 +25,7 @@ void Remove(STU *new) {
     new->pre = new;    //前驱指向自己
 }
 
-//函数功能：学生信息链表插入
+//函数功能：学生信息链表插入（尾插法）（前插法）
 void doubleListInsert(STU *head, STU *new) {
     new->pre = head->pre;   //新节点的前驱指向原链表的尾节点
     head->pre->next = new;  //原链表的尾节点的后继指向新节点
@@ -114,38 +114,32 @@ void doubleListInsertSort(STU *head, int value) {
     for (tail = head->next, p = tail->next; p != head; p = tail->next) {
         //从head->next开始遍历，直到tail结束
         for (temp = head; temp != tail; temp = temp->next) {
+            //因为doubleListInsert函数是前插法，所以要把p插入到temp->next前面！！！
             if (value == 1) {  //按总分排序
                 //如果p的总分小于temp->next的总分，说明p应该插入到temp->next前面
                 if (p->totalScore < temp->next->totalScore) {
                     Remove(p);  //从原位置删除p节点
-                    doubleListInsert(temp, p);
+                    doubleListInsert(temp->next, p);
                     break;
                 }
             } else if (value == 2) {    //按学号排序
                 //如果p的学号小于temp->next的学号，说明p应该插入到temp->next前面
                 if (strcmp(p->studentID, temp->next->studentID) < 0) {
                     Remove(p);  //从原位置删除p节点
-                    doubleListInsert(temp, p);
+                    doubleListInsert(temp->next, p);
                     break;
                 }
             } else if (value == 3) {   //按姓名排序
                 //如果p的姓名小于temp->next的姓名，说明p应该插入到temp->next前面
                 if (strcmp(p->studentName, temp->next->studentName) < 0) {
                     Remove(p);  //从原位置删除p节点
-                    doubleListInsert(temp, p);
+                    doubleListInsert(temp->next, p);
                     break;
                 }
             }
         }
-
-        printf("本轮排序插入值：%f, ", p->totalScore);
-        if (tail == temp)   //在tail前面没有插入，就下移
-        {
-            printf("已处于插入位置\n");
+        if (tail == temp) {   //在tail前面没有插入，就下移
             tail = tail->next;
-        } else {
-            //p已经处于插入位置，显示时要用p->next->data
-            printf("插入到%f的前面\n", p->next->totalScore);
         }
     }
 }
