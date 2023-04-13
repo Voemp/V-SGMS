@@ -181,13 +181,13 @@ int menuController(char *menu[], int choice_num) {
             return choice_num;
         } else if (c1 >= '0' && c1 <= '9') {   //如果输入的是数字，则直接返回
             return c1 - '0';
-        } else if (c1 == -32) {
+        } else if (c1 == -32) {  //如果输入的是方向键
             c2 = getch();
-            if (c2 == DOWNKEY) {
+            if (c2 == DOWNKEY) {    //如果输入的是下方向键
                 if (line == upper) line = lower - 1;
                 drawMenu(menu, upper + 2, ++line, confirm);
             }
-            if (c2 == UPKEY) {
+            if (c2 == UPKEY) {  //如果输入的是上方向键
                 if (line == lower) line = upper + 1;
                 drawMenu(menu, upper + 2, --line, confirm);
             }

@@ -138,14 +138,14 @@ void doubleListInsertSort(STU *head, int value) {
             }
         }
 
-        printf("本轮排序插入值：%d, ", p->totalScore);
+        printf("本轮排序插入值：%f, ", p->totalScore);
         if (tail == temp)   //在tail前面没有插入，就下移
         {
             printf("已处于插入位置\n");
             tail = tail->next;
         } else {
             //p已经处于插入位置，显示时要用p->next->data
-            printf("插入到%d的前面\n", p->next->totalScore);
+            printf("插入到%f的前面\n", p->next->totalScore);
         }
     }
 }

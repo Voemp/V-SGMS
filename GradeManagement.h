@@ -20,9 +20,9 @@ void readBasicInfo();
 void readScoreInfinite(STU *head);
 
 //函数功能：查询每门课程的总分和平均分
-void queryTotalAndAverageScore(STU *stu);
+void queryTotalAndAverageScore(STU *head);
 
 //函数功能：按照每个学生的总分由高到低排出名次表
-void queryRankAscending(STU *stu);
+void queryRankAscending(STU *head);
 
 #endif //V_SGMS_GRADEMANAGEMENT_H

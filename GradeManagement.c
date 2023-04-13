@@ -61,7 +61,7 @@ void readScoreInfinite(STU *head) {
             if (choice != '1' && choice != '2') {
                 printf("输入错误，请重新输入！\r");
                 Sleep(500);
-                printf("                    \r");   //清除输入错误提示
+                printf("                      \r");   //清除输入错误提示
             }
         } while (choice != '1' && choice != '2');   //输入错误则重新输入
     } while (choice == '1');    //输入1则继续录入
@@ -79,7 +79,7 @@ void readScoreInfinite(STU *head) {
 
 
 //函数功能：查询每门课程的总分和平均分
-void queryTotalAndAverageScore(STU *stu) {
+void queryTotalAndAverageScore(STU *head) {
     system("cls");
     printf("*******************************\n");
     printf("*   每门课程的总分和平均分    *\n");
@@ -91,9 +91,9 @@ void queryTotalAndAverageScore(STU *stu) {
         printf("内存分配失败！");
         exit(0);
     }
-    STU *temp = stu->next;  //头结点不参与计算
+    STU *temp = head->next;  //头结点不参与计算
     //计算总分
-    while (temp != stu) {
+    while (temp != head) {
         for (int i = 0; i < g_subjectNum; ++i) {
             total_score[i] += temp->score[i].subjectScore;
         }
@@ -107,20 +107,20 @@ void queryTotalAndAverageScore(STU *stu) {
 }
 
 //函数功能：按照每个学生的总分由高到低排出名次表
-void queryRankAscending(STU *stu) {
+void queryRankAscending(STU *head) {
     system("cls");
     printf("***********************************************\n");
     printf("*       按学生的总分由高到低排出名次表        *\n");
     printf(" ---------------------------------------------\n");
     printf("|       学号       |   姓名   |  总分  | 排名 |\n");
     printf(" ---------------------------------------------\n");
-    doubleListInsertSort(stu, 1);  //按照总分由高到低排序
-    STU *temp = stu->next;  //头结点不参与计算
+    doubleListInsertSort(head, 1);  //按照总分由高到低排序
+    STU *temp = head->pre;  //头结点不参与计算
     int rank = 1;
-    while (temp != stu) {
+    while (temp != head) {
         printf("| %-16s | %-8s | %6.1f | %4d |\n", temp->studentID, temp->studentName, temp->totalScore, rank);
         printf(" ---------------------------------------------\n");
-        temp = temp->next;
+        temp = temp->pre;
         rank++;
     }
 }
