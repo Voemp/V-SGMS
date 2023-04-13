@@ -49,7 +49,7 @@ void readScoreInfinite(STU *head) {
             exit(0);
         }
         readScore(stu);
-        doubleListAdd(head, stu);   //尾插法
+        doubleListInsert(head, stu);   //尾插法
         g_studentNum++;
         printf("录入成功！当前学生人数：%d\n", g_studentNum);
         printf("是否继续录入？\n");
@@ -93,7 +93,7 @@ void queryTotalAndAverageScore(STU *stu) {
     }
     STU *temp = stu->next;  //头结点不参与计算
     //计算总分
-    while (temp != NULL) {
+    while (temp != stu) {
         for (int i = 0; i < g_subjectNum; ++i) {
             total_score[i] += temp->score[i].subjectScore;
         }
@@ -109,17 +109,17 @@ void queryTotalAndAverageScore(STU *stu) {
 //函数功能：按照每个学生的总分由高到低排出名次表
 void queryRankAscending(STU *stu) {
     system("cls");
-    printf("***********************************\n");
-    printf("* 按学生的总分由高到低排出名次表  *\n");
-    printf(" ---------------------------------\n");
-    printf("|  学号  |  姓名  |  总分  | 排名 |\n");
-    printf(" ---------------------------------\n");
+    printf("***********************************************\n");
+    printf("*       按学生的总分由高到低排出名次表        *\n");
+    printf(" ---------------------------------------------\n");
+    printf("|       学号       |   姓名   |  总分  | 排名 |\n");
+    printf(" ---------------------------------------------\n");
     doubleListInsertSort(stu, 1);  //按照总分由高到低排序
     STU *temp = stu->next;  //头结点不参与计算
     int rank = 1;
-    while (temp != NULL) {
-        printf("| %6s | %6s | %6.1f | %4d |\n", temp->studentID, temp->studentName, temp->totalScore, rank);
-        printf(" ---------------------------------\n");
+    while (temp != stu) {
+        printf("| %-16s | %-8s | %6.1f | %4d |\n", temp->studentID, temp->studentName, temp->totalScore, rank);
+        printf(" ---------------------------------------------\n");
         temp = temp->next;
         rank++;
     }

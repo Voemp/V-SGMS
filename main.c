@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
+#include <conio.h>
 #include "Init.h"
 #include "LoginSystem.h"
 #include "struct.h"
 #include "GradeManagement.h"
 #include "StudentDoubleList.h"
+#include "FunctionLib.h"
 
 int g_subjectNum = 6;   //全局变量，用于存储科目数量//可以存在文件中，老师可以修改，修改后重启程序
 int g_studentNum = 0;   //全局变量，用于存储学生数量
@@ -40,7 +42,8 @@ int main() {
                             queryTotalAndAverageScore(head);
                             break;
                         case 2: //按照每个学生的总分由高到低排出名次表
-                            queryRankAscending(head);
+                            //queryRankAscending(head);
+                            doubleListInsertSort(head, 1);
                             break;
                         case 3: //按照每个学生的总分由高到低排出名次表
                             printf("3");

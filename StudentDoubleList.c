@@ -13,7 +13,7 @@ STU *doubleListCreate() {
         exit(0);
     }
     head->pre = head;
-    head->next = NULL;
+    head->next = head;
     return head;
 }
 
@@ -23,14 +23,6 @@ void Remove(STU *new) {
     new->next->pre = new->pre;  //后继的前驱指向前驱
     new->next = new;    //后继指向自己
     new->pre = new;    //前驱指向自己
-}
-
-//函数功能：学生信息链表添加（尾插法）
-void doubleListAdd(STU *head, STU *new) {
-    new->pre = head->pre;   //新节点的前驱指向原链表的尾节点
-    head->pre->next = new;  //原链表的尾节点的后继指向新节点
-    new->next = NULL;    //新节点的后继指向NULL
-    head->pre = new;    //头节点的前驱指向新节点
 }
 
 //函数功能：学生信息链表插入
@@ -49,7 +41,7 @@ void doubleListWriteToFile(STU *head) {
         exit(0);
     }
     STU *temp = head->next;
-    while (temp != NULL) {
+    while (temp != head) {
         fwrite(temp, sizeof(STU), 1, fp);
         temp = temp->next;
     }
@@ -78,7 +70,7 @@ STU *doubleListReadFromFile() {
             exit(0);
         }
         fread(stu, sizeof(STU), 1, fp);
-        doubleListAdd(head, stu);   //尾插法
+        doubleListInsert(head, stu);   //尾插法
     }
     fclose(fp);
     return head;
@@ -87,7 +79,7 @@ STU *doubleListReadFromFile() {
 //函数功能：链表释放
 void doubleListFree(STU *head) {
     STU *temp = head->next;
-    while (temp != NULL) {
+    while (temp != head) {
         STU *temp2 = temp->next;
         free(temp);
         temp = temp2;
@@ -98,8 +90,8 @@ void doubleListFree(STU *head) {
 //函数功能：学生信息链表打印
 void doubleListPrint(STU *head) {
     STU *temp = head->next;
-    while (temp != NULL) {
-        printf("%-16s%-10s", temp->studentID, temp->studentName);
+    while (temp != head) {
+        printf("%-16s%-8s ", temp->studentID, temp->studentName);
         for (int i = 0; i < g_subjectNum; ++i) {
             printf("\t%.1f", temp->score[i].subjectScore);
         }
@@ -114,38 +106,46 @@ void doubleListPrint(STU *head) {
  */
 void doubleListInsertSort(STU *head, int value) {
     //头结点是空的或者表是空的或者表只有一个节点时候不用排
-    if (!head || head->next == NULL || head->next->next == NULL) {
+    if (!head || head->next == head || head->next->next == head) {
         return;
     }
-    STU *p, *q, *tail;
+    STU *p, *temp, *tail;
     //head->next->next开始遍历，tail及tail前面的是排好序的，p是本轮待插入值，等于head时结束
     for (tail = head->next, p = tail->next; p != head; p = tail->next) {
         //从head->next开始遍历，直到tail结束
-        for (q = head; q != tail; q = q->next) {
+        for (temp = head; temp != tail; temp = temp->next) {
             if (value == 1) {  //按总分排序
-                //如果p的总分小于q的总分，就把p插入到q的前面
-                if (p->totalScore < q->next->totalScore) {
+                //如果p的总分小于temp->next的总分，说明p应该插入到temp->next前面
+                if (p->totalScore < temp->next->totalScore) {
                     Remove(p);  //从原位置删除p节点
-                    doubleListInsert(q, p); //把p节点插入到q->next前面,即q的后面
+                    doubleListInsert(temp, p);
                     break;
                 }
             } else if (value == 2) {    //按学号排序
-                //如果p的学号小于q的学号，就把p插入到q的前面
-                if (strcmp(p->studentID, q->next->studentID) < 0) {
+                //如果p的学号小于temp->next的学号，说明p应该插入到temp->next前面
+                if (strcmp(p->studentID, temp->next->studentID) < 0) {
                     Remove(p);  //从原位置删除p节点
-                    doubleListInsert(q, p); //把p节点插入到q->next前面,即q的后面
+                    doubleListInsert(temp, p);
                     break;
                 }
             } else if (value == 3) {   //按姓名排序
-                //如果p的姓名小于q的姓名，就把p插入到q的前面
-                if (strcmp(p->studentName, q->next->studentName) < 0) {
+                //如果p的姓名小于temp->next的姓名，说明p应该插入到temp->next前面
+                if (strcmp(p->studentName, temp->next->studentName) < 0) {
                     Remove(p);  //从原位置删除p节点
-                    doubleListInsert(q, p); //把p节点插入到q->next前面,即q的后面
+                    doubleListInsert(temp, p);
                     break;
                 }
             }
-            //if
         }
-        tail = tail->next;  //下移tail
+
+        printf("本轮排序插入值：%d, ", p->totalScore);
+        if (tail == temp)   //在tail前面没有插入，就下移
+        {
+            printf("已处于插入位置\n");
+            tail = tail->next;
+        } else {
+            //p已经处于插入位置，显示时要用p->next->data
+            printf("插入到%d的前面\n", p->next->totalScore);
+        }
     }
 }
