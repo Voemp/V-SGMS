@@ -1,6 +1,9 @@
 // Created by VoidEmpty on 2023/4/4.
 
 #include "StudentDoubleList.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
 
 //函数功能：学生信息链表初始化
 STU *doubleListCreate() {

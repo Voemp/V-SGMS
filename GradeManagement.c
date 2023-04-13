@@ -1,5 +1,10 @@
 // Created by VoidEmpty on 2023/4/3.
 #include "GradeManagement.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
+#include <conio.h>
+#include "StudentDoubleList.h"
 
 //函数功能：从文件读取程序基本信息
 void readBasicInfo() {

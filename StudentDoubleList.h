@@ -3,9 +3,6 @@
 #ifndef V_SGMS_STUDENTDOUBLELIST_H
 #define V_SGMS_STUDENTDOUBLELIST_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <windows.h>
 #include "Struct.h"
 
 extern int g_subjectNum;

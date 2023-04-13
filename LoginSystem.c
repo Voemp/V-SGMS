@@ -1,5 +1,15 @@
 // Created by VoidEmpty on 2023/3/29.
 #include "LoginSystem.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <string.h>
+#include <windows.h>
+#include "FunctionLib.h"
+
+#define TEMPKEY -32
+#define UPKEY 72
+#define DOWNKEY 80
 
 //函数功能：登录模块
 int loginMod(USER *temp_user, int x, int y) {
