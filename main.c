@@ -43,10 +43,9 @@ int main() {
                             break;
                         case 2: //按照每个学生的总分由高到低排出名次表
                             queryRankAscending(head);
-                            //doubleListInsertSort(head, 1);
                             break;
                         case 3: //按照每个学生的总分由高到低排出名次表
-                            printf("3");
+                            queryRankDescending(head);
                             break;
                         case 4: //按照学号由小到大排出成绩表
                             printf("4");

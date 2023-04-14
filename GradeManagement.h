@@ -25,4 +25,7 @@ void queryTotalAndAverageScore(STU *head);
 //函数功能：按照每个学生的总分由高到低排出名次表
 void queryRankAscending(STU *head);
 
+//函数功能：按照每个学生的总分由低到高排出名次表
+void queryRankDescending(STU *head);
+
 #endif //V_SGMS_GRADEMANAGEMENT_H

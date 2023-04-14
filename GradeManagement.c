@@ -124,3 +124,22 @@ void queryRankAscending(STU *head) {
         rank++;
     }
 }
+
+//函数功能：按照每个学生的总分由低到高排出名次表
+void queryRankDescending(STU *head) {
+    system("cls");
+    printf("***********************************************\n");
+    printf("*       按学生的总分由低到高排出名次表        *\n");
+    printf(" ---------------------------------------------\n");
+    printf("|       学号       |   姓名   |  总分  | 倒数 |\n");
+    printf(" ---------------------------------------------\n");
+    doubleListInsertSort(head, 1);  //按照总分由高到低排序
+    STU *temp = head->next;  //头结点不参与计算
+    int rank = 1;
+    while (temp != head) {
+        printf("| %-16s | %-8s | %6.1f | %4d |\n", temp->studentID, temp->studentName, temp->totalScore, rank);
+        printf(" ---------------------------------------------\n");
+        temp = temp->next;
+        rank++;
+    }
+}
