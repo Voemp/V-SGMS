@@ -191,9 +191,63 @@ void queryRankID(STU *head) {
 
 //函数功能：按照学号查询学生排名及其各科考试成绩
 void checkRankByID(STU *head) {
-    system("cls");
-    printf("******************************\n");
-    printf("*按照学号查询学生排名及其各科考试成绩*\n");
-    printf("******************************\n");
-    printf(">>>\n");
+    int choice = 0;
+    do {
+        system("cls");
+        printf("**************************************\n");
+        printf("*按照学号查询学生排名及其各科考试成绩*\n");
+        printf("**************************************\n");
+        printf(">>>\n");
+        printf("请输入想要查找的学号：");
+        char studentID[20];
+        scanf("%s", studentID);
+        printf(">>>\n");
+        STU *outcome = doubleListSearch(head, studentID);
+        if (outcome == NULL) {
+            choice = 0;
+            printf("未找到该学生！");
+            Sleep(500);
+        } else {
+            printf(" -----------------------------");
+            for (int i = 0; i < g_subjectNum; ++i) {
+                printf("---------");
+            }
+            printf("-------------------------\n");
+            printf("|       学号       |   姓名   |");
+            for (int i = 0; i < g_subjectNum; ++i) {
+                printf("  第%d科 |", i + 1);
+            }
+            printf("  总分  | 平均分 | 排名 |\n");
+            printf(" -----------------------------");
+            for (int i = 0; i < g_subjectNum; ++i) {
+                printf("---------");
+            }
+            printf("-------------------------\n");
+
+            printf("| %-16s | %-8s |", outcome->studentID, outcome->studentName);
+            for (int i = 0; i < g_subjectNum; ++i) {
+                printf(" %6.1f |", outcome->score[i].subjectScore);
+            }
+            printf(" %6.1f | %6.1f |", outcome->totalScore, outcome->averageScore);
+            //按照总分由高到低排序
+            doubleListInsertSort(head, 1);
+            STU *temp = head->pre;  //头结点不参与计算
+            int rank = 1;
+            while (temp != head) {  //遍历链表
+                if (strcmp(temp->studentID, outcome->studentID) == 0) {
+                    printf(" %4d |\n", rank);
+                    break;
+                }
+                temp = temp->pre;
+                rank++;
+            }
+
+            printf(" -----------------------------");
+            for (int i = 0; i < g_subjectNum; ++i) {
+                printf("---------");
+            }
+            printf("-------------------------\n");
+            choice = 1;
+        }
+    } while (choice == 0);
 }

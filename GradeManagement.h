@@ -31,4 +31,7 @@ void queryRankDescending(STU *head);
 //函数功能：按照学号由小到大排出成绩表
 void queryRankID(STU *head);
 
+//函数功能：按照学号查询学生排名及其各科考试成绩
+void checkRankByID(STU *head);
+
 #endif //V_SGMS_GRADEMANAGEMENT_H

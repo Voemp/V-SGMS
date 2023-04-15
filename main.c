@@ -54,7 +54,7 @@ int main() {
                             queryRankID(head);
                             break;
                         case 5://按照学号查询学生排名及其各科考试成绩
-                            printf("5");
+                            checkRankByID(head);
                             break;
                         case 6:
                             printf("6");
@@ -72,7 +72,7 @@ int main() {
                     }
                     if (choice2 != 8) { //如果不是返回上一级菜单，就暂停
                         IN_REDWORD;
-                        printf("按ESC键返回上一级菜单。。。");
+                        printf("\n按ESC键返回上一级菜单。。。");
                         IN_WHITE;
                         while (getch() != 27) {
                             continue;

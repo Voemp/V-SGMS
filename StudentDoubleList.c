@@ -34,7 +34,7 @@ void doubleListInsert(STU *head, STU *new) {
 }
 
 //函数功能：学生信息链表查找
-STU *doubleListFind(STU *head, char *studentID) {
+STU *doubleListSearch(STU *head, char *studentID) {
     STU *temp = head->next;
     while (temp != head) {
         if (strcmp(temp->studentID, studentID) == 0)
