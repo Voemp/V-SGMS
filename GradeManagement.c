@@ -189,20 +189,36 @@ void queryRankID(STU *head) {
     }
 }
 
-//函数功能：按照学号查询学生排名及其各科考试成绩
-void checkRankByID(STU *head) {
+/*函数功能：按要求查询学生排名及其各科考试成绩
+ * 参数说明：head：双向循环链表的头结点
+ *value：1表示按照学号查询，2表示按照姓名查询
+ */
+void checkStudent(STU *head, int value) {
     int choice = 0;
     do {
         system("cls");
-        printf("**************************************\n");
-        printf("*按照学号查询学生排名及其各科考试成绩*\n");
-        printf("**************************************\n");
-        printf(">>>\n");
-        printf("请输入想要查找的学号：");
-        char studentID[20];
-        scanf("%s", studentID);
-        printf(">>>\n");
-        STU *outcome = doubleListSearch(head, studentID);
+        STU *outcome = NULL;
+        if (value == 1) {
+            printf("************************************\n");
+            printf("*按学号查询学生排名及其各科考试成绩*\n");
+            printf("************************************\n");
+            printf(">>>\n");
+            printf("请输入想要查找的学号：");
+            char studentID[20];
+            scanf("%s", studentID);
+            printf(">>>\n");
+            outcome = doubleListSearchID(head, studentID);
+        } else if (value == 2) {
+            printf("************************************\n");
+            printf("*按姓名查询学生排名及其各科考试成绩*\n");
+            printf("************************************\n");
+            printf(">>>\n");
+            printf("请输入想要查找的姓名：");
+            char studentName[20];
+            scanf("%s", studentName);
+            printf(">>>\n");
+            outcome = doubleListSearchName(head, studentName);
+        }
         if (outcome == NULL) {
             choice = 0;
             printf("未找到该学生！");

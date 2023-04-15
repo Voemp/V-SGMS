@@ -14,7 +14,7 @@ extern char *loginMenu[7];
 extern char *mainMenu[10];
 
 //学生成绩查询菜单（教师版）声明
-extern char *studentGradeQueryMenu1[12];
+extern char *studentGradeQueryMenu1[13];
 
 //学生成绩管理界面声明
 extern char *studentGradeManageMenu1[8];

@@ -38,7 +38,7 @@ int main() {
                 break;
             case 1: //学生成绩查询
                 do {
-                    choice2 = menuController(studentGradeQueryMenu1, 8);
+                    choice2 = menuController(studentGradeQueryMenu1, 9);
                     head = doubleListReadFromFile();
                     switch (choice2) {
                         case 1: //查询每门课程的总分和平均分
@@ -53,24 +53,27 @@ int main() {
                         case 4: //按照学号由小到大排出成绩表
                             queryRankID(head);
                             break;
-                        case 5://按照学号查询学生排名及其各科考试成绩
-                            checkRankByID(head);
+                        case 5://按学号查询学生排名及其各科考试成绩
+                            checkStudent(head, 1);
                             break;
-                        case 6:
+                        case 6://按姓名查询学生排名及其各科考试成绩
+                            checkStudent(head, 2);
+                            break;
+                        case 7://统计不同分数段的人数百分比
                             printf("6");
                             break;
-                        case 7: //输出每个学生全部信息
+                        case 8: //输出每个学生全部信息
                             system("cls");
                             doubleListPrint(head);
                             break;
-                        case 8: //返回上一级菜单
+                        case 9: //返回上一级菜单
                             break;
                         default:
                             printf("没有这个选项！");
                             Sleep(300);
                             break;
                     }
-                    if (choice2 != 8) { //如果不是返回上一级菜单，就暂停
+                    if (choice2 != 9) { //如果不是返回上一级菜单，就暂停
                         IN_REDWORD;
                         printf("\n按ESC键返回上一级菜单。。。");
                         IN_WHITE;
@@ -81,7 +84,7 @@ int main() {
                     }
                     choice1 = 0;    //返回上一级菜单
                     doubleListFree(head);
-                } while (choice2 < 1 || choice2 > 8);
+                } while (choice2 < 1 || choice2 > 9);
                 break;
             case 2: //学生成绩管理
                 do {

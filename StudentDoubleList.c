@@ -33,11 +33,22 @@ void doubleListInsert(STU *head, STU *new) {
     head->pre = new;    //头节点的前驱指向新节点
 }
 
-//函数功能：学生信息链表查找
-STU *doubleListSearch(STU *head, char *studentID) {
+//函数功能：学生信息链表按学号查找
+STU *doubleListSearchID(STU *head, char *studentID) {
     STU *temp = head->next;
     while (temp != head) {
         if (strcmp(temp->studentID, studentID) == 0)
+            return temp;
+        temp = temp->next;
+    }
+    return NULL;
+}
+
+//函数功能：学生信息链表按姓名查找
+STU *doubleListSearchName(STU *head, char *studentName) {
+    STU *temp = head->next;
+    while (temp != head) {
+        if (strcmp(temp->studentName, studentName) == 0)
             return temp;
         temp = temp->next;
     }
