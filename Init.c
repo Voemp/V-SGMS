@@ -177,7 +177,7 @@ int menuController(char *menu[], int choice_num) {
     drawMenu(menu, upper + 2, line, confirm);   //绘制菜单
     char c1, c2;
     while ((c1 = getch()) != '\r') {
-        if (c1 == 27) {
+        if (c1 == 27) { //如果输入的是ESC键
             return choice_num;
         } else if (c1 >= '0' && c1 <= '9') {   //如果输入的是数字，则直接返回
             return c1 - '0';

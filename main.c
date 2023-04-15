@@ -9,6 +9,9 @@
 #include "StudentDoubleList.h"
 #include "FunctionLib.h"
 
+#define IN_REDWORD SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xfc)
+#define IN_WHITE SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xf9)
+
 int g_subjectNum = 6;   //全局变量，用于存储科目数量//可以存在文件中，老师可以修改，修改后重启程序
 int g_studentNum = 0;   //全局变量，用于存储学生数量
 USER *g_user = NULL;    //全局变量，用于存储当前登录用户的信息
@@ -48,9 +51,9 @@ int main() {
                             queryRankDescending(head);
                             break;
                         case 4: //按照学号由小到大排出成绩表
-                            printf("4");
+                            queryRankID(head);
                             break;
-                        case 5:
+                        case 5://按照学号查询学生排名及其各科考试成绩
                             printf("5");
                             break;
                         case 6:
@@ -68,8 +71,13 @@ int main() {
                             break;
                     }
                     if (choice2 != 8) { //如果不是返回上一级菜单，就暂停
-                        printf("按任意键继续。。。");
-                        getch();    //暂停
+                        IN_REDWORD;
+                        printf("按ESC键返回上一级菜单。。。");
+                        IN_WHITE;
+                        while (getch() != 27) {
+                            continue;
+                        }
+                        choice2 = 0;
                     }
                     choice1 = 0;    //返回上一级菜单
                     doubleListFree(head);

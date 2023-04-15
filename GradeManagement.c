@@ -81,8 +81,10 @@ void readScoreInfinite(STU *head) {
 //函数功能：查询每门课程的总分和平均分
 void queryTotalAndAverageScore(STU *head) {
     system("cls");
-    printf("*******************************\n");
-    printf("*   每门课程的总分和平均分    *\n");
+    printf("************************\n");
+    printf("*每门课程的总分和平均分*\n");
+    printf("************************\n");
+    printf(">>>\n");
     printf(" -----------------------------\n");
     printf("|  课程名称 |  总分  | 平均分 |\n");
     printf(" -----------------------------\n");
@@ -109,8 +111,10 @@ void queryTotalAndAverageScore(STU *head) {
 //函数功能：按照每个学生的总分由高到低排出名次表
 void queryRankAscending(STU *head) {
     system("cls");
-    printf("***********************************************\n");
-    printf("*       按学生的总分由高到低排出名次表        *\n");
+    printf("********************************\n");
+    printf("*按学生的总分由高到低排出名次表*\n");
+    printf("********************************\n");
+    printf(">>>\n");
     printf(" ---------------------------------------------\n");
     printf("|       学号       |   姓名   |  总分  | 排名 |\n");
     printf(" ---------------------------------------------\n");
@@ -128,8 +132,10 @@ void queryRankAscending(STU *head) {
 //函数功能：按照每个学生的总分由低到高排出名次表
 void queryRankDescending(STU *head) {
     system("cls");
-    printf("***********************************************\n");
-    printf("*       按学生的总分由低到高排出名次表        *\n");
+    printf("********************************\n");
+    printf("*按学生的总分由低到高排出名次表*\n");
+    printf("********************************\n");
+    printf(">>>\n");
     printf(" ---------------------------------------------\n");
     printf("|       学号       |   姓名   |  总分  | 倒数 |\n");
     printf(" ---------------------------------------------\n");
@@ -142,4 +148,52 @@ void queryRankDescending(STU *head) {
         temp = temp->next;
         rank++;
     }
+}
+
+//函数功能：按照学号由小到大排出成绩表
+void queryRankID(STU *head) {
+    system("cls");
+    printf("****************************\n");
+    printf("*按照学号由小到大排出成绩表*\n");
+    printf("****************************\n");
+    printf(">>>\n");
+    printf(" -----------------------------");
+    for (int i = 0; i < g_subjectNum; ++i) {
+        printf("---------");
+    }
+    printf("------------------\n");
+    printf("|       学号       |   姓名   |");
+    for (int i = 0; i < g_subjectNum; ++i) {
+        printf("  第%d科 |", i + 1);
+    }
+    printf("  总分  | 平均分 |\n");
+    printf(" -----------------------------");
+    for (int i = 0; i < g_subjectNum; ++i) {
+        printf("---------");
+    }
+    printf("------------------\n");
+    doubleListInsertSort(head, 2);   //按照学号由小到大排序
+    STU *temp = head->next;  //头结点不参与计算
+    while (temp != head) {
+        printf("| %-16s | %-8s |", temp->studentID, temp->studentName);
+        for (int i = 0; i < g_subjectNum; ++i) {
+            printf(" %6.1f |", temp->score[i].subjectScore);
+        }
+        printf(" %6.1f | %6.1f |\n", temp->totalScore, temp->averageScore);
+        printf(" -----------------------------");
+        for (int i = 0; i < g_subjectNum; ++i) {
+            printf("---------");
+        }
+        printf("------------------\n");
+        temp = temp->next;
+    }
+}
+
+//函数功能：按照学号查询学生排名及其各科考试成绩
+void checkRankByID(STU *head) {
+    system("cls");
+    printf("******************************\n");
+    printf("*按照学号查询学生排名及其各科考试成绩*\n");
+    printf("******************************\n");
+    printf(">>>\n");
 }
