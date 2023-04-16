@@ -116,10 +116,12 @@ void About() {
     printf("*             作者：VoidEmpty              *\n");
     printf("*             版本：1.0                    *\n");
     printf("*             日期：2023.04.01             *\n");
-    printf("*             作者Github：                 *\n");
+    printf("*作者Github：");
     IN_CYANWORD;
-    printf("*         https://github.com/Voemp         *\n");
+    printf("https://github.com/Voemp");
     IN_WHITE;
+    printf("      *\n");
+    printf("*项目地址：https://github.com/Voemp/V-SGMS *\n");
     printf("********************************************\n");
     IN_REDWORD;
     printf("         &按回车访问作者Github主页&\n");
