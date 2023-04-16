@@ -111,13 +111,33 @@ void doubleListFree(STU *head) {
 
 //函数功能：学生信息链表打印
 void doubleListPrint(STU *head) {
+    printf(" -----------------------------");
+    for (int i = 0; i < g_subjectNum; ++i) {
+        printf("---------");
+    }
+    printf("------------------\n");
+    printf("|       学号       |   姓名   |");
+    for (int i = 0; i < g_subjectNum; ++i) {
+        printf("  第%d科 |", i + 1);
+    }
+    printf("  总分  | 平均分 |\n");
+    printf(" -----------------------------");
+    for (int i = 0; i < g_subjectNum; ++i) {
+        printf("---------");
+    }
+    printf("------------------\n");
     STU *temp = head->next;
     while (temp != head) {
-        printf("%-16s%-8s ", temp->studentID, temp->studentName);
+        printf("| %-16s | %-8s |", temp->studentID, temp->studentName);
         for (int i = 0; i < g_subjectNum; ++i) {
-            printf("\t%.1f", temp->score[i].subjectScore);
+            printf(" %6.1f |", temp->score[i].subjectScore);
         }
-        printf("\n");
+        printf(" %6.1f | %6.1f |\n", temp->totalScore, temp->averageScore);
+        printf(" -----------------------------");
+        for (int i = 0; i < g_subjectNum; ++i) {
+            printf("---------");
+        }
+        printf("------------------\n");
         temp = temp->next;
     }
 }
@@ -164,4 +184,13 @@ void doubleListInsertSort(STU *head, int value) {
             tail = tail->next;
         }
     }
+}
+
+//函数功能：检测学生信息链表是否为空
+int doubleListIsEmpty(STU *head) {
+    if (head->next == head) {
+        printf("学生信息为空！\n");
+        return 1;
+    }
+    return 0;
 }

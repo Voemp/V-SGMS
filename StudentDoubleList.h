@@ -41,4 +41,7 @@ void doubleListPrint(STU *head);
  */
 void doubleListInsertSort(STU *head, int value);
 
+//函数功能：检测学生信息链表是否为空
+int doubleListIsEmpty(STU *head);
+
 #endif //V_SGMS_STUDENTDOUBLELIST_H

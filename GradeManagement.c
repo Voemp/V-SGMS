@@ -19,6 +19,8 @@ void readBasicInfo() {
     fclose(fp);
 }
 
+//管理部分开始
+
 //函数功能：录入成绩
 void readScore(STU *stu) {
     stu->totalScore = 0;    //初始化总分
@@ -76,15 +78,13 @@ void readScoreInfinite(STU *head) {
 
     Sleep(500);
 }
+//管理部分结束
 
+
+//查询部分开始
 
 //函数功能：查询每门课程的总分和平均分
-void queryTotalAndAverageScore(STU *head) {
-    system("cls");
-    printf("************************\n");
-    printf("*每门课程的总分和平均分*\n");
-    printf("************************\n");
-    printf(">>>\n");
+void printTotalAndAverageScore(STU *head) {
     printf(" -----------------------------\n");
     printf("|  课程名称 |  总分  | 平均分 |\n");
     printf(" -----------------------------\n");
@@ -108,9 +108,23 @@ void queryTotalAndAverageScore(STU *head) {
     free(total_score);
 }
 
+//函数功能：查询每门课程的总分和平均分
+void queryTotalAndAverageScore(STU *head) {
+    system("cls");
+    if (doubleListIsEmpty(head) == 1)   //判断链表是否为空
+        return;
+    printf("************************\n");
+    printf("*每门课程的总分和平均分*\n");
+    printf("************************\n");
+    printf(">>>\n");
+    printTotalAndAverageScore(head);
+}
+
 //函数功能：按照每个学生的总分由高到低排出名次表
 void queryRankAscending(STU *head) {
     system("cls");
+    if (doubleListIsEmpty(head) == 1)   //判断链表是否为空
+        return;
     printf("********************************\n");
     printf("*按学生的总分由高到低排出名次表*\n");
     printf("********************************\n");
@@ -132,6 +146,8 @@ void queryRankAscending(STU *head) {
 //函数功能：按照每个学生的总分由低到高排出名次表
 void queryRankDescending(STU *head) {
     system("cls");
+    if (doubleListIsEmpty(head) == 1)   //判断链表是否为空
+        return;
     printf("********************************\n");
     printf("*按学生的总分由低到高排出名次表*\n");
     printf("********************************\n");
@@ -153,40 +169,14 @@ void queryRankDescending(STU *head) {
 //函数功能：按照学号由小到大排出成绩表
 void queryRankID(STU *head) {
     system("cls");
+    if (doubleListIsEmpty(head) == 1)   //判断链表是否为空
+        return;
     printf("****************************\n");
     printf("*按照学号由小到大排出成绩表*\n");
     printf("****************************\n");
     printf(">>>\n");
-    printf(" -----------------------------");
-    for (int i = 0; i < g_subjectNum; ++i) {
-        printf("---------");
-    }
-    printf("------------------\n");
-    printf("|       学号       |   姓名   |");
-    for (int i = 0; i < g_subjectNum; ++i) {
-        printf("  第%d科 |", i + 1);
-    }
-    printf("  总分  | 平均分 |\n");
-    printf(" -----------------------------");
-    for (int i = 0; i < g_subjectNum; ++i) {
-        printf("---------");
-    }
-    printf("------------------\n");
     doubleListInsertSort(head, 2);   //按照学号由小到大排序
-    STU *temp = head->next;  //头结点不参与计算
-    while (temp != head) {
-        printf("| %-16s | %-8s |", temp->studentID, temp->studentName);
-        for (int i = 0; i < g_subjectNum; ++i) {
-            printf(" %6.1f |", temp->score[i].subjectScore);
-        }
-        printf(" %6.1f | %6.1f |\n", temp->totalScore, temp->averageScore);
-        printf(" -----------------------------");
-        for (int i = 0; i < g_subjectNum; ++i) {
-            printf("---------");
-        }
-        printf("------------------\n");
-        temp = temp->next;
-    }
+    doubleListPrint(head);
 }
 
 /*函数功能：按要求查询学生排名及其各科考试成绩
@@ -197,6 +187,8 @@ void checkStudent(STU *head, int value) {
     int choice = 0;
     do {
         system("cls");
+        if (doubleListIsEmpty(head) == 1)   //判断链表是否为空
+            return;
         STU *outcome = NULL;
         if (value == 1) {
             printf("************************************\n");
@@ -267,3 +259,58 @@ void checkStudent(STU *head, int value) {
         }
     } while (choice == 0);
 }
+
+/*函数功能：按优秀（90-100）、良好（80-89）、中等（70-79）、及格（60-69）、
+ * 不及格（0-59） 5 个类别，统计每个类别的人数以及所占的百分比
+ * 参数说明：head：双向循环链表的头结点
+ */
+void statisticalScores(STU *head) {
+    system("cls");
+    if (doubleListIsEmpty(head) == 1)   //判断链表是否为空
+        return;
+    printf("****************************\n");
+    printf("*统计不同分数段的人数百分比*\n");
+    printf("****************************\n");
+    printf(">>>\n");
+    printf(" ----------------------------------------------------------------------------------\n");
+    printf("|       |     优秀     |     良好     |     中等     |     及格     |    不及格    |\n");
+    printf(" ----------------------------------------------------------------------------------\n");
+    int excellent, good, medium, pass, fail;
+    for (int i = 0; i < g_subjectNum; ++i) {
+        excellent = 0, good = 0, medium = 0, pass = 0, fail = 0;
+        STU *temp = head->next;  //头结点不参与计算
+        while (temp != head) {
+            if (temp->score[i].subjectScore >= 90) {
+                excellent++;
+            } else if (temp->score[i].subjectScore >= 80) {
+                good++;
+            } else if (temp->score[i].subjectScore >= 70) {
+                medium++;
+            } else if (temp->score[i].subjectScore >= 60) {
+                pass++;
+            } else {
+                fail++;
+            }
+            temp = temp->next;
+        }
+        printf("| 第%d科 | %4d人/%4.1f%% | %4d人/%4.1f%% | %4d人/%4.1f%% | %4d人/%4.1f%% | %4d人/%4.1f%% |\n",
+               i + 1, excellent, (double) excellent / g_studentNum * 100, good, (double) good / g_studentNum * 100,
+               medium, (double) medium / g_studentNum * 100, pass, (double) pass / g_studentNum * 100,
+               fail, (double) fail / g_studentNum * 100);
+        printf(" ----------------------------------------------------------------------------------\n");
+    }
+}
+
+//函数功能：输出全部信息
+void printAll(STU *head) {
+    system("cls");
+    if (doubleListIsEmpty(head) == 1)   //判断链表是否为空
+        return;
+    printf("**************\n");
+    printf("*输出全部信息*\n");
+    printf("**************\n");
+    printf(">>>\n");
+    doubleListPrint(head);
+    printTotalAndAverageScore(head);
+}
+//查询部分结束

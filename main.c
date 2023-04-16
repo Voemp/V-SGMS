@@ -60,11 +60,10 @@ int main() {
                             checkStudent(head, 2);
                             break;
                         case 7://统计不同分数段的人数百分比
-                            printf("6");
+                            statisticalScores(head);
                             break;
-                        case 8: //输出每个学生全部信息
-                            system("cls");
-                            doubleListPrint(head);
+                        case 8: //输出全部信息
+                            printAll(head);
                             break;
                         case 9: //返回上一级菜单
                             break;
@@ -113,10 +112,10 @@ int main() {
                     doubleListFree(head);
                 } while (choice2 < 1 || choice2 > 4);
                 break;
-            case 3: //修改密码
+            case 3: //退出登录
                 printf("3");
                 break;
-            case 4: //退出登录
+            case 4: //科目设置
                 printf("4");
                 break;
             case 5: //关于

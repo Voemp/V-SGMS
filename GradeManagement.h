@@ -37,4 +37,13 @@ void queryRankID(STU *head);
  */
 void checkStudent(STU *head, int value);
 
+/*函数功能：按优秀（90-100）、良好（80-89）、中等（70-79）、及格（60-69）、
+ * 不及格（0-59） 5 个类别，统计每个类别的人数以及所占的百分比
+ * 参数说明：head：双向循环链表的头结点
+ */
+void statisticalScores(STU *head);
+
+//函数功能：输出全部信息
+void printAll(STU *head);
+
 #endif //V_SGMS_GRADEMANAGEMENT_H
