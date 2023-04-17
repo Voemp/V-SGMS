@@ -8,6 +8,6 @@
  * 函数参数：用户链表头指针,起始光标位置x,起始光标位置y
  * 函数返回值：登录成功返回1,登录失败返回0
  */
-int loginMod(USER *temp_user, int x, int y);
+int loginMod(USER *temp_use);
 
 #endif //V_SGMS_LOGINSYSTEM_H

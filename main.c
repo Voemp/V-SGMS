@@ -24,8 +24,41 @@ int main() {
     //welcomeInit();    //欢迎界面
     readBasicInfo();    //读取基本信息
     STU *head = NULL;   //学生信息链表头指针
-    //USER *temp_user = (USER *) calloc(sizeof(USER), 1);
-    //loginMod(temp_user, 6, 3);
+
+    //登录部分
+    USER *temp_user = NULL; //用于临时存储登录用户的信息
+    int login_choice = 0;   //用于存储登录菜单选项
+    do {
+        temp_user = (USER *) calloc(sizeof(USER), 1);
+        if (temp_user == NULL) {
+            printf("内存分配失败！\n");
+            exit(0);
+        }
+        login_choice = menuController(loginMenu, 3);
+        switch (login_choice) {
+            case 1: //登录已有帐号
+                if (loginMod(temp_user) == 1) {
+                    g_user = temp_user;
+                    break;
+                } else {
+                    free(temp_user);
+                    login_choice = 0;
+                }
+                break;
+            case 2: //注册新的帐号
+                //g_user = registerMod();
+                break;
+            case 3: //退出程序
+                login_choice = menuController(exitConfirmMenu, 2);
+                if (login_choice == 1) {
+                    exit(0);
+                } else {
+                    login_choice = 0;
+                }
+                break;
+        }
+    } while (login_choice < 1 || login_choice > 3);
+
 
     int choice1 = 0, choice2 = 0;   //用于存储用户选择的菜单选项
     //主菜单

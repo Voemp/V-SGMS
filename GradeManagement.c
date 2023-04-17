@@ -15,7 +15,7 @@ void readBasicInfo() {
         printf("文件打开失败！");
         exit(0);
     }
-    fscanf(fp, "%d", &g_studentNum);
+    fscanf(fp, "%d %d", &g_studentNum, &g_subjectNum);
     fclose(fp);
 }
 
@@ -74,7 +74,7 @@ void readScoreInfinite(STU *head) {
         printf("文件打开失败！");
         exit(0);
     }
-    fprintf(fp, "%d", g_studentNum);
+    fprintf(fp, "%d %d", g_studentNum, g_subjectNum);
     fclose(fp);
 
     Sleep(500);
@@ -147,6 +147,13 @@ void deleteStudent(STU *head) {
                 if (choice == '1') {
                     doubleListDelete(head, temp);
                     g_studentNum--;  //学生人数减一
+                    FILE *fp = fopen("BasicInfo.txt", "w");
+                    if (fp == NULL) {
+                        printf("文件打开失败！");
+                        exit(0);
+                    }
+                    fprintf(fp, "%d %d", g_studentNum, g_subjectNum);
+                    fclose(fp);
                     printf("删除成功！当前学生人数：%d\n", g_studentNum);
                     Sleep(500);
                     return;
@@ -399,3 +406,23 @@ void printAll(STU *head) {
     printTotalAndAverageScore(head);
 }
 //查询部分结束
+
+//函数功能：设置科目数量
+void setSubjectNum() {
+    system("cls");
+    printf("******************\n");
+    printf("*设置科目数量信息*\n");
+    printf("******************\n");
+    printf(">>>\n");
+    printf("请输入科目数量：");
+    scanf("%d", &g_subjectNum);
+    FILE *fp = fopen("BasicInfo.txt", "w");
+    if (fp == NULL) {
+        printf("文件打开失败！");
+        exit(0);
+    }
+    fprintf(fp, "%d %d", g_studentNum, g_subjectNum);
+    fclose(fp);
+    printf("科目数量设置成功！\n");
+    Sleep(500);
+}
