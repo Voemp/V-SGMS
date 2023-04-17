@@ -7,7 +7,7 @@
 #include <windows.h>
 #include "FunctionLib.h"
 
-#define ADMINKEY 230417
+#define ADMINKEY "230417"
 #define TEMPKEY -32
 #define UPKEY 72
 #define DOWNKEY 80
@@ -158,38 +158,70 @@ int loginMod(USER *temp_user) {
         }
     }
     fclose(fp);    //关闭文件
-    Sleep(1000);
+    Sleep(500);
     return temp;
 }
 
 //注册模块
 int registerMod(USER *temp_user) {
-    system("cls");
-    printf("********************\n");
-    printf("*       注册       *\n");
-    printf("********************\n");
-    inputAccountAndPassword(temp_user, 6, 3);    //输入帐号和密码
-    //验证管理员密钥
-    char key[20] = "";
-    printf("<如果想注册为教师，请输入管理员密钥>\n<如果想注册为学生，直接按回车键>\n");
-    printf("请输入管理员密钥：\n");
-    scanf("%s", key);
-    if (strcmp(key, "") == 0) {    //判断管理员密钥是否正确
-        temp_user->role = 2;    //将用户的角色设为教师
-    } else {
-        if (strcmp(key, "123456") == 0) {    //判断管理员密钥是否正确
-            temp_user->role = 1;    //将用户的角色设为学生
-        } else {
-            printf("管理员密钥错误！\n");
+    int temp = 1;
+    do {
+        system("cls");
+        printf("********************\n");
+        printf("*       注册       *\n");
+        printf("********************\n");
+        inputAccountAndPassword(temp_user, 6, 3);    //输入帐号和密码
+        //验证管理员密钥
+        char key[20];
+        printf("<如果想注册为教师，请输入管理员密钥>\n<如果想注册为学生，直接按回车键>\n");
+        do {
+            printf("请输入管理员密钥：");
+            scanf("%s", key);
+
+            if (strcmp(key, "0") == 0) {    //判断管理员密钥是否正确
+                temp_user->role = 2;    //将用户的角色设为学生
+            } else if (strcmp(key, ADMINKEY) == 0) {
+                temp_user->role = 1;    //将用户的角色设为教师
+            } else {
+                printf("管理员密钥错误！\n");
+                Sleep(500);
+            }
+        } while (strcmp(key, "0") != 0 && strcmp(key, ADMINKEY) != 0);
+        //判断文件是否存在，如果不存在，则创建文件
+        FILE *tfp = fopen("user.txt", "ab");
+        fclose(tfp);
+        FILE *rfp;
+        if ((rfp = fopen("user.txt", "rb")) == NULL) {    //判断文件是否打开成功
+            printf("文件打开失败！\n");
             Sleep(1000);
-            return 0;
+            exit(0);
         }
-    }
-    FILE *fp;
-    if ((fp = fopen("user.txt", "ab")) == NULL) {    //判断文件是否打开成功
+        USER local_user;
+        fread(&local_user, sizeof(USER), 1, rfp);    //读取文件中的用户信息
+        while (1) {
+            if (strcmp(temp_user->account, local_user.account) == 0) {    //判断帐号是否已存在
+                printf("帐号已存在！\n");
+                Sleep(500);
+                temp = 0;
+            }
+            if (!feof(rfp)) {    //判断是否到达文件尾
+                fread(&local_user, sizeof(USER), 1, rfp);    //读取文件中的用户信息
+            } else {
+                break;
+            }
+        }
+        fclose(rfp);    //关闭文件
+    } while (temp == 0);
+    FILE *wfp;
+    if ((wfp = fopen("user.txt", "ab")) == NULL) {    //判断文件是否打开成功
         printf("文件打开失败！\n");
         Sleep(1000);
         exit(0);
     }
-    fwrite(temp_user, sizeof(USER), 1, fp);    //将用户信息写入文件
+    fwrite(temp_user, sizeof(USER), 1, wfp);    //将用户信息写入文件
+    fclose(wfp);    //关闭文件
+    temp = 1;
+    printf("注册成功！已自动登录。\n");
+    Sleep(500);
+    return temp;
 }

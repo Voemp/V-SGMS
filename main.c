@@ -46,7 +46,10 @@ int main() {
                 }
                 break;
             case 2: //注册新的帐号
-                //g_user = registerMod();
+                if (registerMod(temp_user) == 1) {
+                    g_user = temp_user;
+                    break;
+                }
                 break;
             case 3: //退出程序
                 login_choice = menuController(exitConfirmMenu, 2);

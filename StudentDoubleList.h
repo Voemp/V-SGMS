@@ -5,8 +5,8 @@
 
 #include "Struct.h"
 
-extern int g_subjectNum;
-extern int g_studentNum;
+extern int g_subjectNum;    //科目数量
+extern int g_studentNum;    //学生数量
 
 //函数功能：学生信息链表初始化
 STU *doubleListCreate();
