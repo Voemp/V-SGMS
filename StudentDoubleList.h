@@ -17,6 +17,9 @@ void Remove(STU *new);
 //函数功能：学生信息链表插入
 void doubleListInsert(STU *head, STU *new);
 
+//函数功能：学生信息链表删除
+void doubleListDelete(STU *head, STU *stu);
+
 //函数功能：学生信息链表按学号查找
 STU *doubleListSearchID(STU *head, char *studentID);
 

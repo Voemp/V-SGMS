@@ -90,15 +90,15 @@ int main() {
                     choice2 = menuController(studentGradeManageMenu1, 4);
                     head = doubleListReadFromFile();
                     switch (choice2) {
-                        case 1:
+                        case 1: //录入学生成绩
                             readScoreInfinite(head);
                             choice2 = -1;
                             break;
-                        case 2:
-                            printf("2");
+                        case 2: //修改学生成绩
+                            modifyScore(head);
                             break;
-                        case 3:
-                            printf("3");
+                        case 3: //删除学生信息
+                            deleteStudent(head);
                             break;
                         case 4:
                             choice1 = 0;
@@ -110,6 +110,7 @@ int main() {
                     }
                     doubleListWriteToFile(head);
                     doubleListFree(head);
+                    choice1 = 0;
                 } while (choice2 < 1 || choice2 > 4);
                 break;
             case 3: //退出登录

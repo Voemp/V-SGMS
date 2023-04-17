@@ -33,6 +33,12 @@ void doubleListInsert(STU *head, STU *new) {
     head->pre = new;    //头节点的前驱指向新节点
 }
 
+//函数功能：学生信息链表删除
+void doubleListDelete(STU *head, STU *stu) {
+    Remove(stu);
+    free(stu);
+}
+
 //函数功能：学生信息链表按学号查找
 STU *doubleListSearchID(STU *head, char *studentID) {
     STU *temp = head->next;

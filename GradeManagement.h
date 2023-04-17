@@ -13,11 +13,14 @@ extern int g_studentNum;
 //函数功能：从文件读取程序基本信息
 void readBasicInfo();
 
-/*函数功能：录入学生成绩（教师版）
- * head：学生信息链表头指针
- * 返回值：无
- */
+//函数功能：录入学生成绩（教师版）
 void readScoreInfinite(STU *head);
+
+//函数功能：修改成绩（教师版）
+void modifyScore(STU *head);
+
+//函数功能：删除学生信息（教师版）
+void deleteStudent(STU *head);
 
 //函数功能：查询每门课程的总分和平均分
 void queryTotalAndAverageScore(STU *head);
