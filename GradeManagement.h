@@ -9,6 +9,7 @@
 
 extern int g_subjectNum;
 extern int g_studentNum;
+extern USER *g_user;
 
 //函数功能：从文件读取程序基本信息
 void readBasicInfo();
@@ -48,5 +49,11 @@ void statisticalScores(STU *head);
 
 //函数功能：输出全部信息
 void printAll(STU *head);
+
+//函数功能：查询自己的成绩（学生）
+void checkMyScore(STU *head);
+
+//函数功能：设置科目数量
+void setSubjectNum();
 
 #endif //V_SGMS_GRADEMANAGEMENT_H

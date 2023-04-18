@@ -17,7 +17,7 @@ typedef struct student {
     struct student *pre;   //前一个节点
     char studentID[20]; //学号
     char studentName[20];   //姓名
-    SUB score[6];   //成绩
+    SUB score[9];   //成绩
     float totalScore; //总分
     float averageScore; //平均分
     struct student *next;   //后一个节点

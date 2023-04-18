@@ -6,6 +6,7 @@
 #include <string.h>
 #include <windows.h>
 #include "FunctionLib.h"
+#include "Init.h"
 
 #define ADMINKEY "230417"
 #define TEMPKEY -32
@@ -14,6 +15,47 @@
 #define IN_WHITE SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xf9)
 #define IN_REDWORD SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xfc)
 #define IN_CYANWORD SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xfb)
+
+//登录界面
+void loginSystem() {
+    USER *temp_user = NULL; //用于临时存储登录用户的信息
+    int login_choice = 0;   //用于存储登录菜单选项
+    do {
+        temp_user = (USER *) calloc(sizeof(USER), 1);
+        if (temp_user == NULL) {
+            printf("内存分配失败！\n");
+            exit(0);
+        }
+        login_choice = menuController(loginMenu, 3);
+        switch (login_choice) {
+            case 1: //登录已有帐号
+                if (loginMod(temp_user) == 1) {
+                    g_user = temp_user;
+                    login_status = 1;   //登录状态改为已登录
+                    break;
+                } else {
+                    free(temp_user);
+                    login_choice = 0;
+                }
+                break;
+            case 2: //注册新的帐号
+                if (registerMod(temp_user) == 1) {
+                    g_user = temp_user;
+                    login_status = 1;   //登录状态改为已登录
+                    break;
+                }
+                break;
+            case 3: //退出程序
+                login_choice = menuController(exitConfirmMenu, 2);
+                if (login_choice == 1) {
+                    exit(0);
+                } else {
+                    login_choice = 0;
+                }
+                break;
+        }
+    } while (login_choice < 1 || login_choice > 3);
+}
 
 /*函数功能：帐号和密码输入
  * 参数说明：user：用户结构体指针
@@ -51,18 +93,6 @@ void inputAccountAndPassword(USER *user, int x, int y) {
         ch = getch();    //getch()函数用于获取键盘输入的字符
         COORD pos = getCursor();    //获取光标位置
         temp_y = pos.Y;
-        /*do{
-            if (GetKeyState(VK_CAPITAL)){
-                setCursor(0, y + 3);
-                printf("大写锁定已开启");
-                setCursor(pos.X, pos.Y);
-            }else{
-                setCursor(0, y + 3);
-                printf("\r              ");
-                setCursor(pos.X, pos.Y);
-            }
-            Sleep(100);
-        }while(temp_y == pos.Y);    //如果光标位置没有改变，则一直循环*/
         if (pos.Y == y) {   //如果光标在“帐号：”处
             user->account[i] = ch;    //将键盘输入的字符存入帐号中
         } else if (pos.Y == y + 1) {  //如果光标在“密码：”处
@@ -189,6 +219,11 @@ int registerMod(USER *temp_user) {
         printf("********************\n");
         printf("*       注册       *\n");
         printf("********************\n");
+        setCursor(0, 6);
+        IN_REDWORD;
+        printf("学生请务必使用学号注册！");
+        IN_WHITE;
+        setCursor(0, 3);
         inputAccountAndPassword(temp_user, 6, 3);    //输入帐号和密码
         //验证管理员密钥
         char key[20], ch;
@@ -274,4 +309,16 @@ int registerMod(USER *temp_user) {
     printf("注册成功！已自动登录。\n");
     Sleep(500);
     return temp;
+}
+
+//函数功能：退出登录
+void logoutMod(USER *user) {
+    system("cls");
+    printf("********************\n");
+    printf("*       退出       *\n");
+    printf("********************\n");
+    free(user);    //释放user指针
+    login_status = 0;    //将登录状态设为未登录
+    printf("退出成功！\n");
+    Sleep(500);
 }

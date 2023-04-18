@@ -155,7 +155,7 @@ void deleteStudent(STU *head) {
                     fprintf(fp, "%d %d", g_studentNum, g_subjectNum);
                     fclose(fp);
                     printf("删除成功！当前学生人数：%d\n", g_studentNum);
-                    Sleep(500);
+                    Sleep(800);
                     return;
                 } else if (choice == '2') {
                     printf("已取消删除！\n");
@@ -203,8 +203,10 @@ void printTotalAndAverageScore(STU *head) {
 //函数功能：查询每门课程的总分和平均分
 void queryTotalAndAverageScore(STU *head) {
     system("cls");
-    if (doubleListIsEmpty(head) == 1)   //判断链表是否为空
+    if (doubleListIsEmpty(head) == 1) {   //判断链表是否为空
+        printf("学生信息为空！");
         return;
+    }
     printf("************************\n");
     printf("*每门课程的总分和平均分*\n");
     printf("************************\n");
@@ -215,8 +217,10 @@ void queryTotalAndAverageScore(STU *head) {
 //函数功能：按照每个学生的总分由高到低排出名次表
 void queryRankAscending(STU *head) {
     system("cls");
-    if (doubleListIsEmpty(head) == 1)   //判断链表是否为空
+    if (doubleListIsEmpty(head) == 1) {   //判断链表是否为空
+        printf("学生信息为空！");
         return;
+    }
     printf("********************************\n");
     printf("*按学生的总分由高到低排出名次表*\n");
     printf("********************************\n");
@@ -238,8 +242,10 @@ void queryRankAscending(STU *head) {
 //函数功能：按照每个学生的总分由低到高排出名次表
 void queryRankDescending(STU *head) {
     system("cls");
-    if (doubleListIsEmpty(head) == 1)   //判断链表是否为空
+    if (doubleListIsEmpty(head) == 1) {   //判断链表是否为空
+        printf("学生信息为空！");
         return;
+    }
     printf("********************************\n");
     printf("*按学生的总分由低到高排出名次表*\n");
     printf("********************************\n");
@@ -261,8 +267,10 @@ void queryRankDescending(STU *head) {
 //函数功能：按照学号由小到大排出成绩表
 void queryRankID(STU *head) {
     system("cls");
-    if (doubleListIsEmpty(head) == 1)   //判断链表是否为空
+    if (doubleListIsEmpty(head) == 1) {   //判断链表是否为空
+        printf("学生信息为空！");
         return;
+    }
     printf("****************************\n");
     printf("*按照学号由小到大排出成绩表*\n");
     printf("****************************\n");
@@ -271,16 +279,61 @@ void queryRankID(STU *head) {
     doubleListPrint(head);
 }
 
+//函数功能：打印指定学生的成绩表
+void printStudent(STU *head, STU *stu) {
+    printf(" -----------------------------");
+    for (int i = 0; i < g_subjectNum; ++i) {
+        printf("---------");
+    }
+    printf("-------------------------\n");
+    printf("|       学号       |   姓名   |");
+    for (int i = 0; i < g_subjectNum; ++i) {
+        printf("  第%d科 |", i + 1);
+    }
+    printf("  总分  | 平均分 | 排名 |\n");
+    printf(" -----------------------------");
+    for (int i = 0; i < g_subjectNum; ++i) {
+        printf("---------");
+    }
+    printf("-------------------------\n");
+
+    printf("| %-16s | %-8s |", stu->studentID, stu->studentName);
+    for (int i = 0; i < g_subjectNum; ++i) {
+        printf(" %6.1f |", stu->score[i].subjectScore);
+    }
+    printf(" %6.1f | %6.1f |", stu->totalScore, stu->averageScore);
+    //按照总分由高到低排序
+    doubleListInsertSort(head, 1);
+    STU *temp = head->pre;  //头结点不参与计算
+    int rank = 1;
+    while (temp != head) {  //遍历链表
+        if (strcmp(temp->studentID, stu->studentID) == 0) {
+            printf(" %4d |\n", rank);
+            break;
+        }
+        temp = temp->pre;
+        rank++;
+    }
+
+    printf(" -----------------------------");
+    for (int i = 0; i < g_subjectNum; ++i) {
+        printf("---------");
+    }
+    printf("-------------------------\n");
+}
+
 /*函数功能：按要求查询学生排名及其各科考试成绩
  * 参数说明：head：双向循环链表的头结点
  *value：1表示按照学号查询，2表示按照姓名查询
  */
 void checkStudent(STU *head, int value) {
-    int choice = 0;
+    int temp = 0;
     do {
         system("cls");
-        if (doubleListIsEmpty(head) == 1)   //判断链表是否为空
+        if (doubleListIsEmpty(head) == 1) {   //判断链表是否为空
+            printf("学生信息为空！");
             return;
+        }
         STU *outcome = NULL;
         if (value == 1) {
             printf("************************************\n");
@@ -304,52 +357,14 @@ void checkStudent(STU *head, int value) {
             outcome = doubleListSearchName(head, studentName);
         }
         if (outcome == NULL) {
-            choice = 0;
+            temp = 0;
             printf("未找到该学生！");
             Sleep(500);
         } else {
-            printf(" -----------------------------");
-            for (int i = 0; i < g_subjectNum; ++i) {
-                printf("---------");
-            }
-            printf("-------------------------\n");
-            printf("|       学号       |   姓名   |");
-            for (int i = 0; i < g_subjectNum; ++i) {
-                printf("  第%d科 |", i + 1);
-            }
-            printf("  总分  | 平均分 | 排名 |\n");
-            printf(" -----------------------------");
-            for (int i = 0; i < g_subjectNum; ++i) {
-                printf("---------");
-            }
-            printf("-------------------------\n");
-
-            printf("| %-16s | %-8s |", outcome->studentID, outcome->studentName);
-            for (int i = 0; i < g_subjectNum; ++i) {
-                printf(" %6.1f |", outcome->score[i].subjectScore);
-            }
-            printf(" %6.1f | %6.1f |", outcome->totalScore, outcome->averageScore);
-            //按照总分由高到低排序
-            doubleListInsertSort(head, 1);
-            STU *temp = head->pre;  //头结点不参与计算
-            int rank = 1;
-            while (temp != head) {  //遍历链表
-                if (strcmp(temp->studentID, outcome->studentID) == 0) {
-                    printf(" %4d |\n", rank);
-                    break;
-                }
-                temp = temp->pre;
-                rank++;
-            }
-
-            printf(" -----------------------------");
-            for (int i = 0; i < g_subjectNum; ++i) {
-                printf("---------");
-            }
-            printf("-------------------------\n");
-            choice = 1;
+            printStudent(head, outcome);
+            temp = 1;
         }
-    } while (choice == 0);
+    } while (temp == 0);
 }
 
 /*函数功能：按优秀（90-100）、良好（80-89）、中等（70-79）、及格（60-69）、
@@ -358,8 +373,10 @@ void checkStudent(STU *head, int value) {
  */
 void statisticalScores(STU *head) {
     system("cls");
-    if (doubleListIsEmpty(head) == 1)   //判断链表是否为空
+    if (doubleListIsEmpty(head) == 1) {   //判断链表是否为空
+        printf("学生信息为空！");
         return;
+    }
     printf("****************************\n");
     printf("*统计不同分数段的人数百分比*\n");
     printf("****************************\n");
@@ -396,14 +413,38 @@ void statisticalScores(STU *head) {
 //函数功能：输出全部信息
 void printAll(STU *head) {
     system("cls");
-    if (doubleListIsEmpty(head) == 1)   //判断链表是否为空
+    if (doubleListIsEmpty(head) == 1) {   //判断链表是否为空
+        printf("学生信息为空！");
         return;
+    }
     printf("**************\n");
     printf("*输出全部信息*\n");
     printf("**************\n");
     printf(">>>\n");
     doubleListPrint(head);
     printTotalAndAverageScore(head);
+}
+
+//函数功能：查询自己的成绩（学生）
+void checkMyScore(STU *head) {
+    system("cls");
+    if (doubleListIsEmpty(head) == 1) {   //判断链表是否为空
+        printf("学生信息为空！");
+        return;
+    }
+    printf("****************\n");
+    printf("*查询自己的成绩*\n");
+    printf("****************\n");
+    printf(">>>\n");
+    char studentID[20];
+    strcpy(studentID, g_user->account);
+    STU *stu = doubleListSearchID(head, studentID);
+    if (stu == NULL) {
+        printf("未找到你的成绩！\n<可能是帐号与学号不一致>");
+        Sleep(500);
+    } else {
+        printStudent(head, stu);
+    }
 }
 //查询部分结束
 
@@ -414,7 +455,7 @@ void setSubjectNum() {
     printf("*设置科目数量信息*\n");
     printf("******************\n");
     printf(">>>\n");
-    printf("请输入科目数量：");
+    printf("请输入科目数量（不超过9）：");
     scanf("%d", &g_subjectNum);
     FILE *fp = fopen("BasicInfo.txt", "w");
     if (fp == NULL) {
@@ -424,5 +465,5 @@ void setSubjectNum() {
     fprintf(fp, "%d %d", g_studentNum, g_subjectNum);
     fclose(fp);
     printf("科目数量设置成功！\n");
-    Sleep(500);
+    Sleep(600);
 }
