@@ -11,6 +11,9 @@
 #define TEMPKEY -32
 #define UPKEY 72
 #define DOWNKEY 80
+#define IN_WHITE SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xf9)
+#define IN_REDWORD SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xfc)
+#define IN_CYANWORD SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xfb)
 
 //函数功能：帐号和密码输入
 void inputAccountAndPassword(USER *user, int x, int y) {
@@ -172,46 +175,78 @@ int registerMod(USER *temp_user) {
         printf("********************\n");
         inputAccountAndPassword(temp_user, 6, 3);    //输入帐号和密码
         //验证管理员密钥
-        char key[20];
-        printf("<如果想注册为教师，请输入管理员密钥>\n<如果想注册为学生，直接按回车键>\n");
+        char key[20], ch;
+        IN_CYANWORD;
+        printf("<如果想注册为教师，请输入管理员密钥>\n<如果想注册为学生，请直接按回车键>\n");
+        IN_WHITE;
         do {
             printf("请输入管理员密钥：");
-            scanf("%s", key);
-
-            if (strcmp(key, "0") == 0) {    //判断管理员密钥是否正确
+            do {
+                ch = getch();
+                if (ch == '\b') {
+                    if (strlen(key) > 0) {
+                        key[strlen(key) - 1] = '\0';
+                        printf("\b \b");
+                    }
+                } else if (ch >= '0' && ch <= '9' || ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z' || ch == '_' ||
+                           ch == '@') {
+                    printf("*");
+                    key[strlen(key)] = ch;
+                }
+            } while (ch != '\r');
+            key[strlen(key)] = '\0';
+            if (strlen(key) == 0) {
                 temp_user->role = 2;    //将用户的角色设为学生
+                printf("\n");   //换行
+                break;
             } else if (strcmp(key, ADMINKEY) == 0) {
                 temp_user->role = 1;    //将用户的角色设为教师
+                printf("\n");   //换行
+                break;
             } else {
-                printf("管理员密钥错误！\n");
+                for (int i = strlen(key); i >= 0; i--) {  //清空key数组
+                    key[i] = '\0';
+                }
+                printf("\r                              \r");
+                IN_REDWORD;
+                printf("管理员密钥错误！");
+                IN_WHITE;
                 Sleep(500);
+                printf("\r                \r");
             }
-        } while (strcmp(key, "0") != 0 && strcmp(key, ADMINKEY) != 0);
+        } while (strcmp(key, ADMINKEY) != 0);
+
         //判断文件是否存在，如果不存在，则创建文件
         FILE *tfp = fopen("user.txt", "ab");
         fclose(tfp);
+
         FILE *rfp;
         if ((rfp = fopen("user.txt", "rb")) == NULL) {    //判断文件是否打开成功
             printf("文件打开失败！\n");
             Sleep(1000);
             exit(0);
         }
-        USER local_user;
+
+        USER local_user;    //定义一个用户结构体变量
         fread(&local_user, sizeof(USER), 1, rfp);    //读取文件中的用户信息
+
         while (1) {
             if (strcmp(temp_user->account, local_user.account) == 0) {    //判断帐号是否已存在
                 printf("帐号已存在！\n");
                 Sleep(500);
                 temp = 0;
+                break;
             }
             if (!feof(rfp)) {    //判断是否到达文件尾
                 fread(&local_user, sizeof(USER), 1, rfp);    //读取文件中的用户信息
             } else {
+                temp = 1;
                 break;
             }
         }
         fclose(rfp);    //关闭文件
-    } while (temp == 0);
+    } while (temp == 0);    //如果帐号已存在，则继续循环
+
     FILE *wfp;
     if ((wfp = fopen("user.txt", "ab")) == NULL) {    //判断文件是否打开成功
         printf("文件打开失败！\n");
@@ -220,7 +255,6 @@ int registerMod(USER *temp_user) {
     }
     fwrite(temp_user, sizeof(USER), 1, wfp);    //将用户信息写入文件
     fclose(wfp);    //关闭文件
-    temp = 1;
     printf("注册成功！已自动登录。\n");
     Sleep(500);
     return temp;
