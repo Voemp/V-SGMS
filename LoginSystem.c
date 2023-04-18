@@ -15,7 +15,11 @@
 #define IN_REDWORD SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xfc)
 #define IN_CYANWORD SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xfb)
 
-//函数功能：帐号和密码输入
+/*函数功能：帐号和密码输入
+ * 参数说明：user：用户结构体指针
+ *          x：光标初始位置的横坐标
+ *          y：光标初始位置的纵坐标
+ */
 void inputAccountAndPassword(USER *user, int x, int y) {
     printf("帐号：\n");
     printf("密码：\n");
@@ -47,6 +51,18 @@ void inputAccountAndPassword(USER *user, int x, int y) {
         ch = getch();    //getch()函数用于获取键盘输入的字符
         COORD pos = getCursor();    //获取光标位置
         temp_y = pos.Y;
+        /*do{
+            if (GetKeyState(VK_CAPITAL)){
+                setCursor(0, y + 3);
+                printf("大写锁定已开启");
+                setCursor(pos.X, pos.Y);
+            }else{
+                setCursor(0, y + 3);
+                printf("\r              ");
+                setCursor(pos.X, pos.Y);
+            }
+            Sleep(100);
+        }while(temp_y == pos.Y);    //如果光标位置没有改变，则一直循环*/
         if (pos.Y == y) {   //如果光标在“帐号：”处
             user->account[i] = ch;    //将键盘输入的字符存入帐号中
         } else if (pos.Y == y + 1) {  //如果光标在“密码：”处
