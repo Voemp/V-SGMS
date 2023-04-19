@@ -17,8 +17,14 @@ void readBasicInfo();
 //函数功能：录入学生成绩（教师版）
 void readScoreInfinite(STU *head);
 
+//函数功能：录入成绩（学生版）
+void readScoreOnce(STU *head);
+
 //函数功能：修改成绩（教师版）
-void modifyScore(STU *head);
+void modifyScore1(STU *head);
+
+//函数功能：修改成绩（学生版）
+void modifyScore2(STU *head);
 
 //函数功能：删除学生信息（教师版）
 void deleteStudent(STU *head);

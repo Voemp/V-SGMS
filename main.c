@@ -39,7 +39,7 @@ int main() {
                         break;
                     case 1: //学生成绩查询
                         do {
-                            if (g_user->role == 1) {
+                            if (g_user->role == 1) {    //老师登录
                                 choice2 = menuController(studentGradeQueryMenu1, 9);
                                 head = doubleListReadFromFile();
                                 switch (choice2) {
@@ -83,7 +83,7 @@ int main() {
                                     }
                                     choice2 = 0;
                                 }
-                            } else if (g_user->role == 2) {
+                            } else if (g_user->role == 2) { //学生登录
                                 choice2 = menuController(studentGradeQueryMenu2, 2);
                                 head = doubleListReadFromFile();
                                 if (choice2 == 1) {
@@ -99,32 +99,42 @@ int main() {
                                     choice2 = 9;
                                 }
                             }
-                            choice1 = 0;    //返回上一级菜单
                             doubleListFree(head);
+                            choice1 = 0;    //返回上一级菜单
                         } while (choice2 < 1 || choice2 > 9);
                         break;
                     case 2: //学生成绩管理
                         do {
-                            choice2 = menuController(studentGradeManageMenu1, 4);
+                            if (g_user->role == 1)   //老师登录
+                                choice2 = menuController(studentGradeManageMenu1, 4);
+                            else if (g_user->role == 2)  //学生登录
+                                choice2 = menuController(studentGradeManageMenu2, 4);
                             head = doubleListReadFromFile();
                             switch (choice2) {
                                 case 1: //录入学生成绩
-                                    readScoreInfinite(head);
-                                    choice2 = -1;
+                                    if (g_user->role == 1)   //老师登录
+                                        readScoreInfinite(head);
+                                    else if (g_user->role == 2)  //学生登录
+                                        readScoreOnce(head);
                                     break;
                                 case 2: //修改学生成绩
-                                    modifyScore(head);
+                                    if (g_user->role == 1)   //老师登录
+                                        modifyScore1(head);
+                                    else if (g_user->role == 2)  //学生登录
+                                        modifyScore2(head);
                                     break;
                                 case 3: //删除学生信息
                                     deleteStudent(head);
                                     break;
-                                case 4:
-                                    choice1 = 0;
+                                case 4: //返回上一级菜单
                                     break;
                                 default:
                                     printf("没有这个选项！");
                                     Sleep(300);
                                     break;
+                            }
+                            if (choice2 != 4) { //如果不是返回上一级菜单，就循环
+                                choice2 = 0;
                             }
                             doubleListWriteToFile(head);
                             doubleListFree(head);
@@ -135,7 +145,12 @@ int main() {
                         logoutMod(g_user);
                         break;
                     case 4: //科目设置
-                        setSubjectNum();
+                        if (g_user->role == 1)   //老师登录
+                            setSubjectNum();
+                        else if (g_user->role == 2) {  //学生登录
+                            printf("你没有权限进行此操作！\n");
+                            Sleep(800);
+                        }
                         break;
                     case 5: //关于
                         About();
