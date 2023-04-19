@@ -228,9 +228,9 @@ void bonusScene() {
     // 移动窗口
     SetWindowPos(window, NULL, 0, 0, 0, 0, SWP_NOSIZE);
     // 设置窗口大小
-    setWindowSize(295, 1094);
+    setWindowSize(327, 1094);
     system("color f6");
-    openWeb("https://www.bilibili.com/video/BV1K64y1z71C");
+    openWeb("https://www.bilibili.com/video/BV1K64y1z71C/?share_source=copy_web&vd_source=5f5cb3412d1c4cb294585c18e26b6ae8&t=0");
     system("cls");
     printf("******************\n");
     printf("*   光——星尘   *\n");
