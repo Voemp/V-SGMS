@@ -14,7 +14,7 @@
 int g_subjectNum = 6;   //全局变量，用于存储科目数量//可以存在文件中，老师可以修改
 int g_studentNum = 0;   //全局变量，用于存储学生数量
 USER *g_user = NULL;    //全局变量，用于存储当前登录用户的信息
-int login_status = 1;   //全局变量，用于存储当前登录状态，0为未登录，1为登录
+int login_status = 0;   //全局变量，用于存储当前登录状态，0为未登录，1为登录
 
 int main() {
     setTitle("V-SGMS 5.0");
@@ -22,7 +22,7 @@ int main() {
     HWND window = GetConsoleWindow();
     SetWindowPos(window, NULL, 510, 330, 0, 0, SWP_NOSIZE);
     setWindowSize(479, 326);
-    //welcomeInit();    //欢迎界面
+    welcomeInit();    //欢迎界面
     setWindowSize(943, 598);
     readBasicInfo();    //读取基本信息
     STU *head = NULL;   //学生信息链表头指针
