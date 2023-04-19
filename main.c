@@ -17,11 +17,11 @@ USER *g_user = NULL;    //全局变量，用于存储当前登录用户的信息
 int login_status = 0;   //全局变量，用于存储当前登录状态，0为未登录，1为登录
 
 int main() {
-    setTitle("V-SGMS 1.0");
-    //setWindowSize(479, 390);
+    setTitle("V-SGMS 5.0");
     system("color f9");
-
-    //welcomeInit();    //欢迎界面
+    setWindowSize(479, 326);
+    welcomeInit();    //欢迎界面
+    setWindowSize(943, 598);
     readBasicInfo();    //读取基本信息
     STU *head = NULL;   //学生信息链表头指针
     int choice1 = 0, choice2 = 0;   //用于存储用户选择的菜单选项
@@ -124,7 +124,10 @@ int main() {
                                         modifyScore2(head);
                                     break;
                                 case 3: //删除学生信息
-                                    deleteStudent(head);
+                                    if (g_user->role == 1)   //老师登录
+                                        deleteStudent1(head);
+                                    else if (g_user->role == 2)  //学生登录
+                                        deleteStudent2(head);
                                     break;
                                 case 4: //返回上一级菜单
                                     break;

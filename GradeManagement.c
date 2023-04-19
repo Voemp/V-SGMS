@@ -219,7 +219,7 @@ void modifyScore2(STU *head) {
 }
 
 //函数功能：删除学生信息（教师版）
-void deleteStudent(STU *head) {
+void deleteStudent1(STU *head) {
     int choice;  //用于判断本次是否删除
     char studentID[20];
     system("cls");
@@ -232,46 +232,91 @@ void deleteStudent(STU *head) {
     STU *temp = head->next;  //头结点不参与计算
     while (temp != head) {
         if (strcmp(temp->studentID, studentID) == 0) {
-            break;
+            printStudent(head, temp);    //打印学生信息
+            //确认是否删除
+            printf("是否删除？\n");
+            IN_CYAN;
+            printf("1.是\t2.否\n");
+            IN_WHITE;
+            do {
+                choice = getch() - '0';
+                if (choice == 1) {
+                    doubleListDelete(head, temp);
+                    g_studentNum--;  //学生人数减一
+                    FILE *fp = fopen("BasicInfo.txt", "w");
+                    if (fp == NULL) {
+                        printf("文件打开失败！");
+                        exit(0);
+                    }
+                    fprintf(fp, "%d %d", g_studentNum, g_subjectNum);
+                    fclose(fp);
+                    printf("删除成功！当前学生人数：%d\n", g_studentNum);
+                    Sleep(800);
+                    return;
+                } else if (choice == 2) {
+                    printf("已取消删除！\n");
+                    Sleep(500);
+                } else {
+                    printf("输入错误，请重新输入！\r");
+                    Sleep(500);
+                    printf("                      \r");   //清除输入错误提示
+                }
+            } while (choice != 1 && choice != 2);   //输入错误则重新输入
+            return;
         }
         temp = temp->next;
     }
-    if (temp == head) {
-        printf("未找到该学生！\n");
-        choice = 2;
-        Sleep(500);
-    } else {
-        printStudent(head, temp);    //打印学生信息
-        //确认是否删除
-        printf("是否删除？\n");
-        IN_CYAN;
-        printf("1.是\t2.否\n");
-        IN_WHITE;
-        do {
-            choice = getch() - '0';
-            if (choice == 1) {
-                doubleListDelete(head, temp);
-                g_studentNum--;  //学生人数减一
-                FILE *fp = fopen("BasicInfo.txt", "w");
-                if (fp == NULL) {
-                    printf("文件打开失败！");
-                    exit(0);
+    printf("未找到该学生！\n");
+    Sleep(800);
+}
+
+//函数功能：删除学生信息（学生版）
+void deleteStudent2(STU *head) {
+    int choice;  //用于判断本次是否删除
+    system("cls");
+    printf("******************\n");
+    printf("*学生信息删除系统*\n");
+    printf("******************\n");
+    printf(">>>\n");
+    STU *temp = head->next;  //头结点不参与计算
+    while (temp != head) {
+        if (strcmp(temp->studentID, g_user->account) == 0) {
+            printStudent(head, temp);    //打印学生信息
+            //确认是否删除
+            printf("是否删除？\n");
+            IN_CYAN;
+            printf("1.是\t2.否\n");
+            IN_WHITE;
+            do {
+                choice = getch() - '0';
+                if (choice == 1) {
+                    doubleListDelete(head, temp);
+                    g_studentNum--;  //学生人数减一
+                    FILE *fp = fopen("BasicInfo.txt", "w");
+                    if (fp == NULL) {
+                        printf("文件打开失败！");
+                        exit(0);
+                    }
+                    fprintf(fp, "%d %d", g_studentNum, g_subjectNum);
+                    fclose(fp);
+                    printf("删除成功！");
+                    Sleep(800);
+                    return;
+                } else if (choice == 2) {
+                    printf("已取消删除！\n");
+                    Sleep(500);
+                } else {
+                    printf("输入错误，请重新输入！\r");
+                    Sleep(500);
+                    printf("                      \r");   //清除输入错误提示
                 }
-                fprintf(fp, "%d %d", g_studentNum, g_subjectNum);
-                fclose(fp);
-                printf("删除成功！当前学生人数：%d\n", g_studentNum);
-                Sleep(800);
-                return;
-            } else if (choice == 2) {
-                printf("已取消删除！\n");
-                Sleep(500);
-            } else {
-                printf("输入错误，请重新输入！\r");
-                Sleep(500);
-                printf("                      \r");   //清除输入错误提示
-            }
-        } while (choice != 1 && choice != 2);   //输入错误则重新输入
+            } while (choice != 1 && choice != 2);   //输入错误则重新输入
+            return;
+        }
+        temp = temp->next;
     }
+    printf("未找到你的信息！\n");
+    Sleep(800);
 }
 
 //管理部分结束

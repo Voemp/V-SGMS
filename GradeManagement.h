@@ -27,7 +27,10 @@ void modifyScore1(STU *head);
 void modifyScore2(STU *head);
 
 //函数功能：删除学生信息（教师版）
-void deleteStudent(STU *head);
+void deleteStudent1(STU *head);
+
+//函数功能：删除学生信息（学生版）
+void deleteStudent2(STU *head);
 
 //函数功能：查询每门课程的总分和平均分
 void queryTotalAndAverageScore(STU *head);
