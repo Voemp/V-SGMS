@@ -19,12 +19,15 @@ int login_status = 0;   //全局变量，用于存储当前登录状态，0为未登录，1为登录
 int main() {
     setTitle("V-SGMS 5.0");
     system("color f9");
+    HWND window = GetConsoleWindow();
+    SetWindowPos(window, NULL, 510, 330, 0, 0, SWP_NOSIZE);
     setWindowSize(479, 326);
     welcomeInit();    //欢迎界面
     setWindowSize(943, 598);
     readBasicInfo();    //读取基本信息
     STU *head = NULL;   //学生信息链表头指针
     int choice1 = 0, choice2 = 0;   //用于存储用户选择的菜单选项
+    int bonus = 0;  //用于存储彩蛋的状态
     while (1) {
         if (login_status == 0) {
             loginSystem();  //登录系统
@@ -34,8 +37,13 @@ int main() {
                 choice1 = menuController(mainMenu, 6);
                 switch (choice1) {
                     case 0:
-                        printf("这是个小彩蛋，嘻嘻！");
-                        Sleep(500);
+                        bonus += 1;
+                        if (bonus <= 5) {
+                            printf("+%d", bonus);
+                            Sleep(200);
+                        }
+                        if (bonus >= 5)
+                            bonusScene();   //彩蛋
                         break;
                     case 1: //学生成绩查询
                         do {
@@ -175,7 +183,5 @@ int main() {
             } while (choice1 < 1 || choice1 > 6);
         }
     }
-    system("pause");
     return 0;
-
 }

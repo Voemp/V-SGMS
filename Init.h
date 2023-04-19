@@ -47,4 +47,7 @@ void drawMenu(char *menu[], int RowSize, int line, int confirm);
  */
 int menuController(char *menu[], int choice_num);
 
+//º¯Êý¹¦ÄÜ£º²Êµ°
+void bonusScene();
+
 #endif //V_SGMS_INIT_H
