@@ -230,7 +230,7 @@ void bonusScene() {
     // 设置窗口大小
     setWindowSize(295, 1094);
     system("color f6");
-    openWeb("https://player.bilibili.com/player.html?cid=&aid=759691105&page=1&as_wide=1");
+    openWeb("https://www.bilibili.com/video/BV1K64y1z71C");
     system("cls");
     printf("******************\n");
     printf("*   光——星尘   *\n");
