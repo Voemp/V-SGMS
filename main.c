@@ -38,12 +38,24 @@ int main() {
                 switch (choice1) {
                     case 0:
                         bonus += 1;
-                        if (bonus <= 5) {
-                            printf("+%d", bonus);
+                        if (bonus == 1) {
+                            printf("嗯？");
+                            Sleep(200);
+                        } else if (bonus == 2) {
+                            printf("你好像在找什么东西。");
+                            Sleep(200);
+                        } else if (bonus == 3) {
+                            printf("被你发现了！");
+                            Sleep(200);
+                        } else if (bonus == 4) {
+                            printf("好叭。");
                             Sleep(200);
                         }
-                        if (bonus >= 5)
+                        if (bonus >= 5) {
+                            printf("这里是彩蛋喔！");
+                            Sleep(500);
                             bonusScene();   //彩蛋
+                        }
                         break;
                     case 1: //学生成绩查询
                         do {
