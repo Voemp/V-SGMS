@@ -111,6 +111,7 @@ void readScoreOnce(STU *head) {
         if (strcmp(temp->studentID, stu->studentID) == 0) {
             printf("你的信息已存在！\n");
             Sleep(800);
+            break;
         }
         temp = temp->next;
     }
