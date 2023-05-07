@@ -28,6 +28,9 @@ VOID setTitle(LPCSTR lpTitle);
  */
 void setWindowSize(int x, int y);
 
+//函数功能：设置窗口位置
+void setWindowPos(int x, int y);
+
 /*函数功能：打开网页
  *函数参数：website
  *函数返回值：无

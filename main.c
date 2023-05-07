@@ -19,8 +19,7 @@ int login_status = 0;   //全局变量，用于存储当前登录状态，0为未登录，1为登录
 int main() {
     setTitle("V-SGMS 5.0");
     system("color f9");
-    HWND window = GetConsoleWindow();
-    SetWindowPos(window, NULL, 510, 330, 0, 0, SWP_NOSIZE);
+    setWindowPos(510, 330);
     setWindowSize(479, 326);
     welcomeInit();    //欢迎界面
     setWindowSize(943, 598);

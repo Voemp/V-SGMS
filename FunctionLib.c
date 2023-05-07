@@ -31,6 +31,12 @@ void setWindowSize(int x, int y) {
     MoveWindow(hwnd, rect.left, rect.top, x, y, TRUE);
 }
 
+//函数功能：设置窗口位置
+void setWindowPos(int x, int y) {
+    HWND hwnd = GetConsoleWindow();
+    SetWindowPos(hwnd, NULL, x, y, 0, 0, SWP_NOSIZE);
+}
+
 //函数功能：打开网页
 void openWeb(char *website) {
     ShellExecuteA(0, "open", website, 0, 0, 1);
